@@ -1,34 +1,40 @@
-import java.sql.*;
+package server;
 
-public class Pilot {
-    String pilotID;
-    private String name;
+import java.util.Set;
+
+public class Pilot extends User{
+
+    private int pilotID;
+    private String pilotStatus;
     private int age;
-    boolean inFlight;
-    PilotStatus status;
-    int totalFlight;
-    int shipDestroyed;
+    private Set<String> flightDone;
+    private int totalFlight;
+    private int shipDestroyed;
 
-    public Pilot(String pilotID,String name,int age,boolean inFlight,PilotStatus status,int totalFlight,int shipDestroyed) {
-        this.pilotID=pilotID;
-        this.name=name;
-        this.age=age;
-        this.inFlight=inFlight;
-        this.status=status;
-        this.totalFlight=totalFlight;
-        this.shipDestroyed=shipDestroyed;
+    public Pilot(String username, String password, int pilotID, String pilotStatus, int age, Set<String> flightDone, int totalFlight, int shipDestroyed) {
+        super(username, password);
+        this.pilotID = pilotID;
+        this.pilotStatus = pilotStatus;
+        this.age = age;
+        this.flightDone = flightDone;
+        this.totalFlight = totalFlight;
+        this.shipDestroyed = shipDestroyed;
     }
 
-    public String getName() {
-        return name;
+    public int getPilotID() {
+        return pilotID;
+    }
+
+    public String getPilotStatus() {
+        return pilotStatus;
     }
 
     public int getAge() {
         return age;
     }
 
-    public PilotStatus getStatusPilot() {
-        return status;
+    public Set<String> getFlightDone() {
+        return flightDone;
     }
 
     public int getTotalFlight() {
@@ -38,35 +44,5 @@ public class Pilot {
     public int getShipDestroyed() {
         return shipDestroyed;
     }
-
-    public boolean isInFlight() {
-        return inFlight;
-    }
-
-    public String getPilotID() {
-        return pilotID;
-    }
-
-    public PilotStatus getStatus() {
-        return status;
-    }
-
-    public void displayHistory(Pilot p) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://mysql-rentatie.alwaysdata.net/rentatie_bdd", "rentatie", "MotDePasseComplique20212022");
-
-            Statement stmt = con.createStatement();
-            ResultSet rst = stmt.executeQuery("select * from Flight where pilotID="+p.pilotID+"");
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
 
 }
