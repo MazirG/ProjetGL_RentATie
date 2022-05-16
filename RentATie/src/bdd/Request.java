@@ -4,17 +4,21 @@
 
 package bdd;
 
+import java.io.FileInputStream;
 import java.sql.*;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class Request {
 
     public static Connection getConnection() throws Exception{
-        try{
-            String driver = "com.mysql.cj.jdbc.Driver";
-            String url = "jdbc:mysql://mysql-rentatie.alwaysdata.net:3306/rentatie_bdd";
-            String username = "rentatie";
-            String password = "MotDePasseComplique20212022";
+        Properties props = new Properties();
+        try (FileInputStream fis = new FileInputStream("ressources/conf.properties")) {
+            props.load(fis);
+            String driver = props.getProperty("jdbc.driver.class");
+            String url = props.getProperty("jdbc.url");
+            String username = props.getProperty("jdbc.username");
+            String password = props.getProperty("jdbc.password");
             Class.forName(driver);
 
             Connection conn = DriverManager.getConnection(url,username,password);
