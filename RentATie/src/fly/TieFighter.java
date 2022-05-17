@@ -1,6 +1,7 @@
 package fly;
 
-import status.*;
+import status.FighterStatus;
+import status.TieModel;
 
 public class TieFighter {
 

@@ -1,9 +1,6 @@
 package fly;
 
 
-import java.sql.Time;
-import java.util.Date;
-
 public class Flight {
         private int flightID;
         private int pilotID;
