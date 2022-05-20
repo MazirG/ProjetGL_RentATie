@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="538.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.creationMenuPilotController">
+   <children>
+      <VBox layoutX="152.0" layoutY="96.0" prefHeight="378.0" prefWidth="296.0">
+         <children>
+            <HBox prefHeight="46.0" prefWidth="296.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="96.0" text="Pilot username :" />
+                  <TextField fx:id="tfUsername" />
+               </children>
+            </HBox>
+            <HBox prefHeight="43.0" prefWidth="296.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="97.0" text="Pilot password :" />
+                  <TextField fx:id="tfPassword" />
+               </children>
+            </HBox>
+            <HBox prefHeight="47.0" prefWidth="296.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pilot name : " />
+                  <TextField fx:id="tfName" />
+               </children>
+            </HBox>
+            <HBox prefHeight="42.0" prefWidth="171.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pilot age : " />
+                  <TextField fx:id="tfAge" />
+               </children>
+            </HBox>
+            <HBox prefHeight="42.0" prefWidth="171.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pilot status " />
+                  <Label text="Safe {Default}" />
+               </children>
+            </HBox>
+            <HBox prefHeight="42.0" prefWidth="171.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pilot availability : " />
+                  <Label text="Available {Default}" />
+               </children>
+            </HBox>
+            <HBox prefHeight="42.0" prefWidth="171.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pilot status :  " />
+                  <Label text="Safe {Default}" />
+               </children>
+            </HBox>
+            <HBox prefHeight="42.0" prefWidth="171.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of flights : " />
+                  <Label text="0 {Default}" />
+               </children>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="296.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ships destroyed " />
+                  <Label text="0 {Default}" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Text layoutX="67.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter the name and the age of the new Pilot" wrappingWidth="466.86328125">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnValidate" layoutX="405.0" layoutY="475.0" mnemonicParsing="false" onAction="#btnValidate_action" text="Validate" />
+      <Button fx:id="btnCancel" layoutX="492.0" layoutY="475.0" mnemonicParsing="false" onAction="#btnCancel_action" text="Cancel" />
+   </children>
+</AnchorPane>

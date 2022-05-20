@@ -1,35 +1,35 @@
 package fly;
 
 
+import status.TieModel;
+
 public class Flight {
         private int flightID;
         private int pilotID;
+        private TieModel fighterModel;
         private int fighterID;
         private String missionName;
-        private String dateBegin;
-        private String dateEnd;
-        private String flightDuration;
-        private String rentDuration;
+        private String start;
+        private String endRent;
+        private String endFlight;
 
 
-        public Flight(int flightID, int pilotID,int fighterID,String missionName, String dateBegin, String dateEnd, String flightDuration, String rentDuration) {
+        public Flight(int flightID, int pilotID, TieModel fighterModel, int fighterID, String missionName, String start, String endRent, String endFlight) {
             this.flightID = flightID;
             this.pilotID=pilotID;
+            this.fighterModel=fighterModel;
             this.fighterID=fighterID;
             this.missionName = missionName;
-            this.dateBegin = dateBegin;
-            this.dateEnd = dateEnd;
-            this.flightDuration = flightDuration;
-            this.rentDuration = rentDuration;
+            this.start = start;
+            this.endRent = endRent;
+            this.endFlight = endFlight;
         }
 
         public int getFlightID() {
             return flightID;
         }
 
-        public void setFlightID(int flightID) {
-            this.flightID = flightID;
-        }
+        public void setFlightID(int flightID) { this.flightID = flightID; }
 
         public String getMissionName() {
             return missionName;
@@ -39,43 +39,23 @@ public class Flight {
             this.missionName = missionName;
         }
 
-        public String getDateBegin() {
-            return dateBegin;
-        }
+        public String getStart() {return start;}
 
-        public void setDateBegin(String dateBegin) {
-            this.dateBegin = dateBegin;
-        }
+        public void setStart(String start) {this.start = start;}
 
-        public String getDateEnd() {
-            return dateEnd;
-        }
+        public String getEndRent() {return endRent; }
 
-        public void setDateEnd(String dateEnd) {
-            this.dateEnd = dateEnd;
-        }
+        public void setEndRent(String endRent) {this.endRent = endRent;}
 
-        public String getFlightDuration() {
-            return flightDuration;
-        }
+        public String getEndFlight() {return endFlight; }
 
-        public void setFlightDuration(String flightDuration) {
-            this.flightDuration = flightDuration;
-        }
-
-        public String getRentDuration() {
-            return rentDuration;
-        }
-
-        public void setRentDuration(String rentDuration) {
-            this.rentDuration = rentDuration;
-        }
+        public void setEndFlight(String endFlight) {this.endFlight = endFlight; }
 
         public int getPilotID() {
             return pilotID;
         }
 
-        public void setPilotID(int pilotID) {
+        public void setPilotID(String piloteID) {
             this.pilotID = pilotID;
         }
 
@@ -87,4 +67,17 @@ public class Flight {
             this.fighterID = fighterID;
         }
 
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "flightID=" + flightID +
+                ", pilotID='" + pilotID + '\'' +
+                ", fighterModel=" + fighterModel +
+                ", fighterID=" + fighterID +
+                ", missionName='" + missionName + '\'' +
+                ", start='" + start + '\'' +
+                ", endRent='" + endRent + '\'' +
+                ", endFlight='" + endFlight + '\'' +
+                '}';
+    }
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.assignMenuPilotController">
+    <children>
+        <Button fx:id="btnCancel" layoutX="349.0" layoutY="354.0" mnemonicParsing="false" onAction="#btnCancel_action" text="Cancel" />
+        <Button fx:id="btnValidate" layoutX="429.0" layoutY="354.0" mnemonicParsing="false" onAction="#btnValidate_action" text="Validate" />
+        <TextField fx:id="searchBar" layoutX="40.0" layoutY="78.0" promptText="Search a pilot by name..." />
+      <Text layoutX="162.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a pilot to assign">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tableItems" layoutX="40.0" layoutY="128.0" prefHeight="200.0" prefWidth="540.0">
+        <columns>
+          <TableColumn fx:id="cId" prefWidth="38.4000244140625" text="id" />
+          <TableColumn fx:id="cName" prefWidth="80.800048828125" text="name" />
+            <TableColumn fx:id="cAge" minWidth="9.5999755859375" prefWidth="53.60003662109375" text="age" />
+            <TableColumn fx:id="cInFlight" minWidth="0.0" prefWidth="58.39996337890625" text="inFlight" />
+            <TableColumn fx:id="cStatus" minWidth="0.0" prefWidth="47.20001220703125" text="status" />
+            <TableColumn fx:id="cTotalFlight" prefWidth="112.79998779296875" text="total-flight" />
+            <TableColumn fx:id="cShipsDestroyed" prefWidth="151.20001220703125" text="ships-destroyed" />
+        </columns>
+      </TableView>
+    </children>
+</AnchorPane>

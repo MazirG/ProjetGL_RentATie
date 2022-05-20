@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="526.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.modifyMenuFighterController">
+    <children>
+        <VBox layoutX="235.0" layoutY="66.0" prefHeight="255.0" prefWidth="476.0">
+            <children>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FIghter ID : " />
+                        <Label text="XXXXXXXX" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fighter model : " />
+                        <Label text="XXXXXXXX" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fighter availability :" />
+                        <Label text="XXXXXXXX" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fighter status : " wrappingWidth="93.61248779296875" />
+                  <RadioButton fx:id="rbFunctional" mnemonicParsing="false" onAction="#rbFunctional_action" prefHeight="18.0" prefWidth="89.0" text="Functional" />
+                  <RadioButton fx:id="rbDamaged" mnemonicParsing="false" onAction="#rbDamaged_action" prefHeight="18.0" prefWidth="84.0" text="Damaged" />
+                  <RadioButton fx:id="rbWreck" mnemonicParsing="false" onAction="#rbWreck_action" prefHeight="18.0" prefWidth="80.0" text="Wreck" />
+                  <RadioButton fx:id="rbDestroyed" mnemonicParsing="false" onAction="#rbDestroyed_action" text="Destroyed" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+        <Button fx:id="btnCancel" layoutX="488.0" layoutY="336.0" mnemonicParsing="false" onAction="#btnCancel_action" text="Cancel" />
+        <Button fx:id="btnValidate" layoutX="407.0" layoutY="336.0" mnemonicParsing="false" onAction="#btnValidate_action" text="Validate" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="28.0" layoutY="66.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+    </children>
+</AnchorPane>

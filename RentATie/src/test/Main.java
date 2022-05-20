@@ -1,66 +1,50 @@
 package test;
 
 import bdd.Request;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import login.Officer;
 import login.Pilot;
-import order.Flight;
-import order.Pilote;
-import order.TieFighter;
+import status.FighterStatus;
+import status.PilotStatus;
+import status.UserPost ;
 
-import static status.FighterStatus.Functional;
-import static status.PilotStatus.Safe;
+import static status.TieModel.Hunter;
+import static status.TieModel.XWing;
 
-public class Main {
+public class Main  extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("/vue/mainMenu.fxml"));
+        primaryStage.setTitle("Hello World");
+        primaryStage.setScene(new Scene(root, 1000, 1000));
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) throws Exception {
+        launch(args);
+
+        Officer off1 = new Officer(1,"Pseudo1","Azerty123");
+        Pilot pil1 = new Pilot("Pseudo2", "Azerty321", 21,"Nom2", 20);
+
+        //Request.logIn("Pseudo1", "Azerty321");
+
+    }
+}
+
+/*public class Main {
 
     public static void main(String[] args) throws Exception {
 
 
-        Officer off1 = new Officer("Pseudo1","Azerty123", 20);
+        Officer off1 = new Officer(1,"Pseudo1","Azerty123");
         Pilot pil1 = new Pilot("Pseudo2", "Azerty321", 21,"Nom2", 20);
 
-        //off1.createUser(off1);
-        //off1.createUser(pil1);
-
-        //Request.logIn("Pseudo1", "Azerty123");
-        //Request.logIn("Pseudo2", "Azerty123");
-        //Request.logIn("Pseudo1", "Az123");
-
-        //off1.modifyOfficerPassword(off1, "Azerty321");
-        //Request.logIn("Pseudo1", "Azerty123");
-        Request.logIn("Pseudo1", "Azerty321");
-
-
-
-//        Off1.displayPilotTable(Pilote.id);
-//
-//        System.out.println("--------------------------");
-//
-//        Request.displayTieFighterTable(TieFighter.fighterID);
-//
-//        System.out.println("--------------------------");
-//
-//        Off1.displayFlightTable(Flight.flightID);
-//
-//        System.out.println("--------------------------");
-//
-//        //Off1.assignFlight("Jean95",2,4,"mission4","2022-05-01", "2022-06-16");
-//        Off1.flightDone(3, Safe,Functional);
-//
-//        System.out.println("--------------------------");
-//
-//        Off1.displayPilotTable(Pilote.id);
-//
-//        System.out.println("--------------------------");
-//
-//        Request.displayTieFighterTable(TieFighter.fighterID);
-//
-//        System.out.println("--------------------------");
-//
-//        Off1.displayFlightTable(Flight.flightID);
-//
-//        System.out.println("--------------------------");
-
-
-
+        Request.displayPilotAvailable();
+        Request.displayTieFighterAvailable();
     }
-}
+}*/

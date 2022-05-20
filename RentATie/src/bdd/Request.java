@@ -3,12 +3,16 @@
 
 package bdd;
 
-import BCrypt.BCrypt;
-import order.Flight;
-import order.Pilote;
-import order.TieFighter;
+import bCrypt.*;
+import fly.Flight;
+import fly.TieFighter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import login.Pilot;
+import login.User;
 import status.FighterStatus;
 import status.PilotStatus;
+import status.TieModel;
 import status.UserPost;
 
 import java.io.FileInputStream;
@@ -49,7 +53,7 @@ public class Request {
             //on affiche les lignes
 
             while (rst.next())
-                System.out.println(rst.getInt(1) + " "+ rst.getString(2) + " "+ rst.getString(3) + " "+ rst.getString(4));
+                System.out.println(rst.getInt(1) + " "+ rst.getString(2) + " "+ rst.getString(5) );
             return true;
 
         } catch (Exception e) {
@@ -60,59 +64,82 @@ public class Request {
 
     // afficher les tables, passer en paramètre l'attribut selon lequel on trie les lignes
 
-    public static boolean displayPilotTable(Pilote order){
+    public static ObservableList displayPilotTable(){
+
+        ObservableList<Pilot> pilots = FXCollections.observableArrayList();
+
         try{
             Connection con = getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rst = stmt.executeQuery("SELECT * FROM Pilote ORDER BY "+order);
-
-            //on affiche les lignes
-
-            while (rst.next())
-                System.out.println(rst.getInt(1) + " "+ rst.getString(2) + " "+ rst.getInt(3) +" "+ rst.getString(4) + " "+ rst.getInt(5) + " "+ rst.getInt(6));
-            return true;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public static boolean displayFlightTable(Flight order){
-        try{
-            Connection con = getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rst = stmt.executeQuery("SELECT * FROM Flight ORDER BY "+order);
+            ResultSet rst = stmt.executeQuery("SELECT * FROM Pilote ");
 
             //on affiche les lignes
 
             while (rst.next()) {
-                System.out.println(rst.getInt(1) + " " + rst.getString(2) + " " + rst.getString(3) + " " + rst.getString(5) + " " + rst.getDate(6) + " " + rst.getDate(7) + " " + rst.getDate(8));
+                String statut =rst.getString(4) ;
+                PilotStatus ps = PilotStatus.valueOf(statut);
+                Pilot pilot = new Pilot(rst.getInt(1), rst.getString(2), rst.getInt(3), ps, rst.getInt(5), rst.getInt(6), rst.getBoolean(7));
+                pilots.add(pilot);
             }
 
-            return true;
+            return pilots;
 
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return pilots;
         }
     }
 
-    public static boolean displayTieFighterTable(TieFighter order){
+    public static ObservableList displayTieFighterTable(){
+
+        ObservableList<TieFighter> fighters = FXCollections.observableArrayList();
+
         try{
             Connection con = getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rst = stmt.executeQuery("SELECT * FROM TieFighter ORDER BY "+order);
+            ResultSet rst = stmt.executeQuery("SELECT * FROM TieFighter");
 
             //on affiche les lignes
 
-            while (rst.next())
-                System.out.println(rst.getInt(1) + " "+ rst.getString(2) + " "+ rst.getBoolean(3) + " " + rst.getString(4));
-            return true;
+            while (rst.next()) {
+                String model = rst.getString(2);
+                TieModel tm = TieModel.valueOf(model);
+                String statut = rst.getString(4);
+                FighterStatus fs = FighterStatus.valueOf(statut);
+                TieFighter tiefighter = new TieFighter(rst.getInt(1), tm, rst.getBoolean(3), fs);
+                fighters.add(tiefighter);
+            }
+
+            return fighters;
 
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return fighters;
+        }
+    }
+
+    public static ObservableList displayFlightTable(){
+
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+        try{
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rst = stmt.executeQuery("SELECT * FROM Flight");
+
+            //on affiche les lignes
+
+            while (rst.next()) {
+                String model = rst.getString(3);
+                TieModel tm = TieModel.valueOf(model);
+                Flight flight = new Flight(rst.getInt(1), rst.getInt(2), tm, rst.getInt(4),rst.getString(5),rst.getString(6),rst.getString(8),rst.getString(8));
+                flights.add(flight);
+            }
+
+            return flights;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return flights;
         }
     }
 
@@ -120,41 +147,67 @@ public class Request {
     //Si officier alors le user n'est pas ajouté à la table Pilote
     //si pilote alors le user est ajouté à la table Pilote
 
-    public static boolean createUser(int pilotID, UserPost post, String name, String username, Integer age, String salt, String hashed) throws Exception{
+    public static boolean createUser(UserPost post, String name, String username, Integer age, String pwd) throws Exception{
         try{
             Connection con = getConnection();
 
             Statement stmt = con.createStatement();
 
-            // On vérifie que l'id n'est pas déjà utilisé
-
-            ResultSet rst = stmt.executeQuery("SELECT COUNT(*) FROM User WHERE id='"+pilotID+"'");
-
-            rst.next();
-            if (rst.getInt(1)>0){
-                System.out.println("id deja existant.");
-                return true;
-            }
-
             // idem pour le username
 
-            rst = stmt.executeQuery("SELECT COUNT(*) FROM User WHERE username='"+username+"'");
+            ResultSet rst = stmt.executeQuery("SELECT COUNT(*) FROM User WHERE username='"+username+"'");
 
             rst.next();
             if (rst.getInt(1)>0){
                 System.out.println("username deja existant.");
-                return true;
+                return false;
             }
 
-            // si les informations précédentes ne sont pas prises, on insert le nouveau créateur
+            // si les informations précédentes ne sont pas prises, on insert le nouveau user
+
+            PreparedStatement pstmt1 = con.prepareStatement("INSERT INTO User (`username`, `post`)VALUES ('" + username + "', '" + post + "')");
+            pstmt1.executeUpdate();
+
+            // on récupère l'id créé par la bdd
+
+            Statement stmt1 = con.createStatement();
+            ResultSet rst1 = stmt1.executeQuery("SELECT id FROM User WHERE username='"+username+"'");
+            rst1.next();
+            int userID = rst1.getInt(1);
+
+            // on stock le mot de passe crypté dans la bdd
+
+            User user = new User(userID,username, pwd);
+            String salt = user.getSalt();
+            String hashed = user.getHashed();
+
+            PreparedStatement pstmt2 = con.prepareStatement("UPDATE User SET salt='"+salt+"', hashed='"+hashed+"' WHERE id="+userID);
+            pstmt2.executeUpdate();
 
             if (post == Pilot) {
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Pilote VALUES ('"+pilotID+"', '"+name+"', '"+age+"', 'safe', 0, 0, 0)");
-            pstmt.executeUpdate();
+                PreparedStatement pstmt3 = con.prepareStatement("INSERT INTO Pilote VALUES ('"+userID+"', '"+name+"', '"+age+"', 'safe', 0, 0, 0)");
+                pstmt3.executeUpdate();
             }
 
-            PreparedStatement pstmt1 = con.prepareStatement("INSERT INTO User VALUES ('" + pilotID + "', '" + username + "', '" + salt + "', '"+ hashed +"' , '" + post + "')");
-            pstmt1.executeUpdate();
+            con.close();
+            return true;
+        } catch(Exception e){
+            System.out.println(e);
+            return false;
+        }
+        finally {
+            System.out.println("Create Completed.");
+        }
+    }
+
+    public static boolean createTieFighter(TieModel model ) throws Exception{
+        try{
+            Connection con = getConnection();
+
+            Statement stmt = con.createStatement();
+
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO TieFighter (`model`, `inFlight`, `status`) VALUES ('"+model+"', '0', 'functional')");
+            pstmt.executeUpdate();
 
             con.close();
             return true;
@@ -169,7 +222,7 @@ public class Request {
 
     //Assigne un vol en prenant un pilote et un vaisseau
 
-    public static boolean assignFlight(String pilotUsername, int fighterID, int flightID, String mission, String startDate, String endRent) throws Exception{
+    public static boolean assignFlight(int pilotID, int fighterID, String mission, String startDate, String endRent) throws Exception{
         try{
             Connection con = getConnection();
 
@@ -179,27 +232,31 @@ public class Request {
             ResultSet rst = stmt.executeQuery("SELECT inFlight,Status FROM TieFighter WHERE fighterID="+fighterID);
 
             rst.next();
-            if (rst.getString("status")=="Destroyed" || rst.getInt("inFlight")!=0){
+            if (!rst.getString("status").equals("Functional") || rst.getInt("inFlight")!=0){
             System.out.println("Tie fighter not available");
-            return true;
+            return false;
             }
+
+            //on verifie la disponibilité du pilote
+
+            Statement stmt3 = con.createStatement();
+            ResultSet rst3 = stmt3.executeQuery("SELECT COUNT(id) FROM Pilote WHERE id="+pilotID);
+            rst3.next();
 
             Statement stmt1 = con.createStatement();
-            ResultSet rst1 = stmt1.executeQuery("SELECT inFlight,Status FROM Pilote WHERE id=(SELECT id FROM User WHERE username='"+pilotUsername+"')");
+            ResultSet rst1 = stmt1.executeQuery("SELECT inFlight,Status FROM Pilote WHERE id="+pilotID);
 
-            rst1.next();
-            if (rst1.getString("status") == "Dead" || rst1.getInt("inFlight")!=0){
-                System.out.println("Pilot not available");
-                return true;
+            if (rst3.getInt(1)==0){
+                System.out.println("Le user correspondant n'est pas un pilote");
+                return false;
+            }else {
+                rst1.next();
+                if (!rst1.getString("status").equals("Safe") || rst1.getInt("inFlight") != 0) {
+                    System.out.println("Pilot not available");
+                    return false;
+                }
             }
 
-            rst = stmt.executeQuery("SELECT COUNT(*) FROM Flight WHERE flightID="+flightID);
-
-            rst.next();
-            if (rst.getInt(1)>0){
-                System.out.println("id deja existant.");
-                return true;
-            }
 
             // si les informations précédentes sont ok, on insert le nouveau vol
 
@@ -207,12 +264,12 @@ public class Request {
             rst2.next();
             String model = rst2.getString(1);
 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Flight (`flightID`, `pilotUsername`, `fighterModel`, `fighterID`, `mission`, `start`, `endRent`) VALUES ('"+flightID+"', '"+pilotUsername+"', '"+model+"', '"+fighterID+"', '"+mission+"', '"+startDate+"', '"+endRent+"')");
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Flight (`pilotID`, `fighterModel`, `fighterID`, `missionName`, `start`, `endRent`) VALUES ('"+pilotID+"', '"+model+"', '"+fighterID+"', '"+mission+"', '"+startDate+"', '"+endRent+"')");
             pstmt.executeUpdate();
 
             con.close();
 
-            InFlightUpdate(fighterID, pilotUsername);
+            InFlightUpdate(fighterID, pilotID);
 
             return true;
 
@@ -227,14 +284,14 @@ public class Request {
 
     //quand on assigne un vol, le vaisseau est directement inFlight=1=true
 
-    public static boolean InFlightUpdate(int fighterID, String pilotUsername){
+    public static boolean InFlightUpdate(int fighterID, int pilotID){
         try{
             Connection con = getConnection();
 
             PreparedStatement pstmt = con.prepareStatement("UPDATE TieFighter SET inFlight="+1+" WHERE fighterID="+fighterID);
             pstmt.executeUpdate();
 
-            PreparedStatement pstmt1 = con.prepareStatement("UPDATE Pilote SET inFlight="+1+" WHERE id=(SELECT id FROM User WHERE username='"+pilotUsername+"')");
+            PreparedStatement pstmt1 = con.prepareStatement("UPDATE Pilote SET inFlight="+1+" WHERE id="+pilotID);
             pstmt1.executeUpdate();
 
             return true;
@@ -246,17 +303,22 @@ public class Request {
             System.out.println("UpdateInFlight Completed.");
         }    }
 
-    //il faut faire la même chose avec le inFlight du pilote
-
-
-
-    public static boolean deletePilot(int id){
+    public static boolean deleteUser(int id){
         try{
             Connection con = getConnection();
 
-            PreparedStatement pstmt = con.prepareStatement("DELETE FROM Pilote WHERE id="+id);
-            pstmt.executeUpdate();
-            return true;
+            //on vérifie que le pilote n'est pas en vol
+            Statement stmt = con.createStatement();
+            ResultSet rst = stmt.executeQuery("SELECT COUNT(*) FROM Pilote WHERE id="+id);
+            rst.next();
+
+            if (rst.getBoolean(1)==false){
+            PreparedStatement pstmt1 = con.prepareStatement("DELETE FROM User WHERE id="+id);
+            pstmt1.executeUpdate();
+            return true;} else {
+                System.out.println("Le pilote est en vol");
+                return false;}
+
         } catch(Exception e){
             System.out.println(e);
             return false;
@@ -286,22 +348,36 @@ public class Request {
 
     //modifier le mdp d'un user
 
-    public static boolean modifyUserPassword(int id, String newSalt, String newHashed){
+    public static boolean modifyUserPassword(int id, String newPwd){
         try{
             Connection con = getConnection();
+            Statement stmt = con.createStatement();
+
+            ResultSet rst = stmt.executeQuery("SELECT username FROM User WHERE id='"+id+"'");
+            rst.next();
+
+            String username = rst.getString(1);
+
+            User user = new User(id, username, newPwd);
+
+            String newSalt = user.getSalt();
+            String newHashed = user.getHashed();
 
             PreparedStatement pstmt = con.prepareStatement("UPDATE User SET salt='"+newSalt+"', hashed='"+newHashed+"' WHERE id="+id);
             pstmt.executeUpdate();
 
             return true;
+
         } catch (Exception e) {
             System.out.println(e);
             return false;
+
         } finally {
             System.out.println("Modify completed.");
         }
     }
 
+    //Changer le statut des vaisseaux et des pilotes librement
     public static boolean modifyFighterStatus(int id, FighterStatus Status){
         try{
             Connection con = getConnection();
@@ -334,6 +410,8 @@ public class Request {
         }
     }
 
+
+    //méthode qu'on va appeler dans flightDone
     public static boolean DoneFighterStatus(int id, FighterStatus Status){
         try{
             Connection con = getConnection();
@@ -377,21 +455,25 @@ public class Request {
 
     //affiche tous les vols d'un pilote passé en paramètre
 
-    public static boolean displayHistory(String username) {
+    public static ObservableList displayHistory(int pilotID) {
+
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+
         try {
             Connection con = getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rst = stmt.executeQuery("select * from Flight where pilotUsername='"+username+"'");
+            ResultSet rst = stmt.executeQuery("select * from Flight where pilotUsername="+pilotID);
 
             while (rst.next()) {
-                System.out.println(rst.getInt(1) + " " + rst.getString(2) + " " + rst.getString(3) + " " + rst.getString(5) + " " + rst.getDate(6) + " " + rst.getDate(7) + " " + rst.getDate(8));
+                String model = rst.getString(3);
+                TieModel tm = TieModel.valueOf(model);
+                Flight flight = new Flight(rst.getInt(1), rst.getInt(2), tm, rst.getInt(4), rst.getString(5), rst.getString(6), rst.getString(8), rst.getString(8));
+                flights.add(flight);
             }
-
-            con.close();
-            return true;
+            return flights;
         }  catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return flights;
         }
     }
 
@@ -420,7 +502,7 @@ public class Request {
                 rst3.next();
                 Date dateEndRent = rst3.getDate(1);
 
-                ResultSet rst1 = stmt.executeQuery("SELECT id FROM User WHERE username = (SELECT pilotUsername FROM Flight WHERE flightID=" + id + ")");
+                ResultSet rst1 = stmt.executeQuery("SELECT pilotID FROM Flight WHERE flightID ="+ id);
                 rst1.next();
                 int Pid = rst1.getInt(1);
 
@@ -456,9 +538,8 @@ public class Request {
         }
     }
 
-
-// verification du mot de passe
-    public static boolean logIn(String username, String pwd) throws Exception{
+    // verification du mot de passe
+    public static int logIn(String username, String pwd) throws Exception{
         try{
             Connection con = getConnection();
 
@@ -483,22 +564,117 @@ public class Request {
                 rst.next();
 
                 if (rst.getInt(1)>0) {
+
+                    rst = stmt.executeQuery("SELECT id FROM User WHERE username='"+username+"'");
+                    rst.next();
+
+                    int id = rst.getInt(1);
                     System.out.println("Logged in.");
+
+                    return(id);
                 }
                 else {
                     System.out.println("Wrong username or password");
+                    return(-1);
                 }
             } else{
                 System.out.println("Wrong username or password");
+                return(-1);
             }
-            return true;
 
         } catch(Exception e){
             System.out.println(e);
-            return false;
+            return (-1);
         }
         finally {
             System.out.println("Create Completed.");
         }
     }
+
+    // On renvoie le post du username
+    public static UserPost post(String username) throws Exception{
+        try{
+            Connection con = getConnection();
+
+            Statement stmt = con.createStatement();
+
+            // On vérifie que le username existe dans la bdd
+            ResultSet rst = stmt.executeQuery("SELECT COUNT(*) FROM User WHERE username='"+username+"'");
+            rst.next();
+
+            if (rst.getInt(1)>0) {
+
+                rst = stmt.executeQuery("SELECT post FROM User WHERE username='" + username + "'");
+                rst.next();
+
+                UserPost post;
+                post = UserPost.valueOf(rst.getString(1));
+                return post;
+            }
+            else {
+                System.out.println("Wrong username");
+                return null;
+            }
+
+        } catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+
+
+    //liste des pilotes et vaisseaux disponibles
+    public static ObservableList displayPilotAvailable(){
+
+        ObservableList<Pilot> pilots = FXCollections.observableArrayList();
+
+        try{
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rst = stmt.executeQuery("SELECT * FROM Pilote WHERE inFlight=FALSE AND status='Safe'");
+
+            //on affiche les lignes
+
+            while (rst.next()) {
+                String statut =rst.getString(4) ;
+                PilotStatus ps = PilotStatus.valueOf(statut);
+                Pilot pilot = new Pilot(rst.getInt(1), rst.getString(2), rst.getInt(3), ps, rst.getInt(5), rst.getInt(6), rst.getBoolean(7));
+                pilots.add(pilot);
+            }
+            return pilots;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return pilots;
+        }
+    }
+
+    public static ObservableList displayTieFighterAvailable(){
+
+        ObservableList<TieFighter> fighters = FXCollections.observableArrayList();
+
+        try{
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rst = stmt.executeQuery("SELECT * FROM TieFighter WHERE inFlight=FALSE AND status='Functional'");
+
+            //on affiche les lignes
+
+            while (rst.next()) {
+                String model = rst.getString(2);
+                TieModel tm = TieModel.valueOf(model);
+                String statut = rst.getString(4);
+                FighterStatus fs = FighterStatus.valueOf(statut);
+                TieFighter tiefighter = new TieFighter(rst.getInt(1), tm, rst.getBoolean(3), fs);
+                fighters.add(tiefighter);
+            }
+            return fighters;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return fighters;
+        }
+    }
+
 }
+

@@ -49,4 +49,13 @@ public class TieFighter {
             this.status = status;
         }
 
+    @Override
+    public String toString() {
+        return "TieFighter{" +
+                "fighterId=" + fighterId +
+                ", model=" + model +
+                ", inFlight=" + inFlight +
+                ", status=" + status +
+                '}';
+    }
 }

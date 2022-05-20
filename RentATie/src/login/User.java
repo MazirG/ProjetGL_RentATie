@@ -1,25 +1,27 @@
 package login;
 
-import BCrypt.BCrypt;
+import bCrypt.BCrypt;
 import bdd.Request;
-public abstract class User {
+public class User {
 
+    private int id;
     private String username;
-
     private String salt;
-
     private String hashed;
 
-    public User(String username, String password) {
+    public User(int id,String username, String password) {
+        this.id=id;
         this.username = username;
         this.salt = BCrypt.gensalt();
         this.hashed = BCrypt.hashpw(password,this.salt);
     }
 
+    public int getId() {
+        return id;
+    }
     public String getUsername() {
         return username;
     }
-
     public String getSalt() {
         return salt;
     }
@@ -27,14 +29,11 @@ public abstract class User {
         return hashed;
     }
 
-    public void setPassword(String newPwd){
-        this.salt = BCrypt.gensalt();
-        this.hashed = BCrypt.hashpw(newPwd,this.salt);
-    }
-
     // Connection à la bdd
-    public void getConnection() throws Exception {
+   /* public void getConnection() throws Exception {
         Request.getConnection();
     }
+    */
+
 }
 

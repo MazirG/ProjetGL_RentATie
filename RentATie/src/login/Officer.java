@@ -1,8 +1,7 @@
 package login;
 
 import bdd.Request;
-import order.Flight;
-import order.Pilote;
+import fly.*;
 import status.FighterStatus;
 import status.PilotStatus;
 import status.UserPost;
@@ -10,66 +9,60 @@ import status.UserPost;
 
 public class Officer extends User{
 
-    private int officerID ;
+    private int officerID;
 
-    public Officer(String username, String password, int officerID) {
-        super(username, password);
-        this.officerID = officerID;
+    public Officer(int id, String username, String password) {
+        super(id, username, password);
+        this.officerID = id;
     }
 
     public int getOfficerID() {
         return officerID;
     }
 
-
-    //méthode sur la table pilot
-    public void displayPilotTable(Pilote order) {
-        Request.displayPilotTable(order);
+   /* //méthodes sur les tables pilot et user
+    public void displayPilotTable() {
+        Request.displayPilotTable();
     }
 
-    public void createUser(Pilot pilot) throws Exception {
-        Request.createUser(pilot.getPilotID(), UserPost.Pilot, pilot.getName(), pilot.getUsername(), pilot.getAge(), pilot.getSalt(), pilot.getHashed());
+  *//*  public void createUser(Pilot pilot) throws Exception {
+        Request.createUser(UserPost.Pilot, pilot.getName(), pilot.getUsername(), pilot.getAge(), pilot.getSalt(), pilot.getHashed());
+    }*//*
+
+    public void deletePilot(User user) {
+
+        Request.deleteUser(user.getId());
+    }
+    public void modifyPilotAge(Pilot pilot, int newAge) {
+        Request.modifyPilotAge(pilot.getPilotID(), newAge);
     }
 
-    public void createUser(Officer officer) throws Exception {
-        Request.createUser(officer.getOfficerID(), UserPost.Officer, null, officer.getUsername(),null, officer.getSalt(), officer.getHashed());
-    }
-
-    public void deletePilot(int id) {
-        Request.deletePilot(id);
-    }
-    public void modifyPilotAge(int id, int Age) {
-        Request.modifyPilotAge(id, Age);
-    }
-
-    public void modifyPilotPassword(Pilot pilot , String newPwd) {
-        pilot.setPassword(newPwd);
-        Request.modifyUserPassword(pilot.getPilotID(), pilot.getSalt(), pilot.getHashed());
-    }
-
-    public void modifyOfficerPassword(Officer officer , String newPwd) {
-        officer.setPassword(newPwd);
-        Request.modifyUserPassword(officer.getOfficerID(), officer.getSalt(), officer.getHashed());
-    }
 
     //méthode sur la table flight
-    public void displayFlightTable(Flight order){
-        Request.displayFlightTable(order);
+    public void displayFlightTable(){
+        Request.displayFlightTable();
     }
 
-    public void assignFlight(String pilotUsername, int fighterID, int flightID, String mission, String startDate, String endRent) throws Exception{
-        Request.assignFlight(pilotUsername,fighterID,flightID,mission, startDate,endRent);
+    public void assignFlight(Pilot pilot, TieFighter tieFighter, Flight flight) throws Exception{
+        Request.assignFlight(pilot.getPilotID(),tieFighter.getFighterId(),flight.getMissionName(), flight.getStart(),flight.getEndRent());
     }
 
-    public void flightDone(int id, PilotStatus Pstatus, FighterStatus Fstatus){
-        Request.flightDone(id, Pstatus, Fstatus);}
+    public void flightDone(Flight flight, PilotStatus Pstatus, FighterStatus Fstatus){
+        Request.flightDone(flight.getFlightID(), Pstatus, Fstatus);}
 
-    public void modifyPilotStatus(int id, PilotStatus status){
-        Request.modifyPilotStatus(id,status);
+    public void modifyPilotStatus(Pilot pilot, PilotStatus newStatus){
+        Request.modifyPilotStatus(pilot.getPilotID(), newStatus);
     }
 
-    public void modifyFighterStatus(int id, FighterStatus Status){
-        Request.modifyFighterStatus(id,Status);
+    public void modifyFighterStatus(TieFighter tieFighter, FighterStatus newStatus){
+        Request.modifyFighterStatus(tieFighter.getFighterId(), newStatus);
     }
+
+    //méthodes sur la table tieFighter
+
+    public void displayTieFighterTable(){
+        Request.displayTieFighterTable();
+    }
+    */
 
 }

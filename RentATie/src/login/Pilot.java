@@ -15,7 +15,7 @@ public class Pilot extends User{
     private int shipDestroyed;
 
     public Pilot(String username, String password, int pilotID, String name, int age, boolean inFlight, PilotStatus status, int totalFlight, int shipDestroyed) {
-        super(username, password);
+        super(pilotID,username, password);
         this.pilotID = pilotID;
         this.name = name;
         this.age = age;
@@ -26,47 +26,71 @@ public class Pilot extends User{
     }
 
     public Pilot(String username, String password, int pilotID, String name, int age) {
-        super(username, password);
+        super(pilotID, username, password);
         this.pilotID = pilotID;
         this.name = name;
         this.age = age;
     }
 
+    public Pilot(int pilotID, String name, int age,PilotStatus status, int totalFlight, int shipDestroyed, boolean inFlight) {
+        super(pilotID,"","");
+        this.pilotID = pilotID;
+        this.name = name;
+        this.age = age;
+        this.inFlight = inFlight;
+        this.status = status;
+        this.totalFlight = totalFlight;
+        this.shipDestroyed = shipDestroyed;
+    }
+
+
+
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public int getAge() {
-        return age;
+        return this.age;
     }
 
-    public PilotStatus getStatusPilot() {
-        return status;
+    public PilotStatus getPilotStatus() {
+        return this.status;
     }
 
     public int getTotalFlight() {
-        return totalFlight;
+        return this.totalFlight;
     }
 
     public int getShipDestroyed() {
-        return shipDestroyed;
+        return this.shipDestroyed;
     }
 
     public boolean isInFlight() {
-        return inFlight;
+        return this.inFlight;
     }
 
     public int getPilotID() {
-        return pilotID;
+        return this.pilotID;
     }
 
     public PilotStatus getStatus() {
-        return status;
+        return this.status;
     }
 
-    public void displayHistory() {
-        Request.displayHistory(this.username);
+    /* public void displayHistory() {
+        Request.displayHistory(this.pilotID);
+    } */
+
+    @Override
+    public String toString() {
+        return "Pilot{" +
+                "pilotID=" + pilotID +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", inFlight=" + inFlight +
+                ", status=" + status +
+                ", totalFlight=" + totalFlight +
+                ", shipDestroyed=" + shipDestroyed +
+                '}';
     }
-
-
 }
