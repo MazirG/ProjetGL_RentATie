@@ -1,0 +1,16 @@
+.table-view {
+    -fx-background-color:rgba(142, 216, 252,0.1);
+    -fx-background-radius: 5;
+
+}
+.table-view .column-header-background{
+    -fx-background-color:#8ed8fc;
+    -fx-background-radius: 8;
+
+}
+
+.table-view .column-header, .table-view .filler{
+    -fx-background-color: transparent;
+    -fx-background-color:#8ed8fc;
+}
+

@@ -1,70 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.modifyMenuFlightController">
+<AnchorPane prefHeight="500.0" prefWidth="748.8" styleClass="main" stylesheets="@style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.modifyMenuFlightController">
     <children>
-        <VBox layoutX="272.0" layoutY="50.0" prefHeight="231.0" prefWidth="326.0">
+        <VBox layoutX="212.0" layoutY="119.0" prefHeight="308.0" prefWidth="515.0">
             <children>
-                <HBox prefHeight="100.0" prefWidth="200.0">
+                <HBox prefHeight="100.0" prefWidth="200.0" styleClass="smallfont">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flight ID : " />
-                        <Label text="XXXXXXXX" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Flight ID : " wrappingWidth="161.1546630859375" />
+                        <Label styleClass="labels" text="XXXXXXXX" />
                     </children>
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0">
+                <HBox prefHeight="100.0" prefWidth="200.0" styleClass="smallfont">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flight name:" />
-                        <Label text="XXXXXXXX" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Flight name:" wrappingWidth="157.05615234375" />
+                        <Label prefHeight="26.0" prefWidth="80.0" styleClass="labels" text="XXXXXXXX" />
                     </children>
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0">
+                <HBox prefHeight="100.0" prefWidth="200.0" styleClass="smallfont">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rent beginning date : " />
-                        <Label text="XXXXXXXX" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Rent start date : " wrappingWidth="158.5015869140625" />
+                        <Label styleClass="labels" text="XXXXXXXX" />
                     </children>
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0">
+                <HBox prefHeight="100.0" prefWidth="200.0" styleClass="smallfont">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rent ending date : " />
-                        <Label text="XXXXXXXX" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Rent end date : " wrappingWidth="153.9609375" />
+                        <Label styleClass="labels" text="XXXXXXXX" />
                     </children>
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0">
+                <HBox prefHeight="100.0" prefWidth="200.0" styleClass="smallfont">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rent duration : " />
-                        <Label text="XXXXXXXX" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Rent back date : " wrappingWidth="153.73748779296875" />
+                        <Label styleClass="labels" text="TODAY'S DATE" />
                     </children>
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rent back date : " />
-                  <DatePicker fx:id="tfDate" prefHeight="0.0" prefWidth="134.0" promptText="Enter a date ..." />
-                    </children>
-                </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="smallfont">
                <children>
-                  <Label prefHeight="18.0" prefWidth="66.0" text="Pilot ID :" />
-                  <Label text="XXXXXXXXXXXXXXXXX" />
+                  <Label prefHeight="26.0" prefWidth="154.0" styleClass="smallfont" text="Pilot ID :" />
+                  <Label prefHeight="26.0" prefWidth="167.0" styleClass="labels" text="XXXXXXXXXXXXXXXXX" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="smallfont">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="151.0" styleClass="smallfont" text="TieFighter ID :" />
+                  <Label styleClass="labels" text="XXXXXXXXXXXXXXXXX" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="101.0" text="TieFighter ID :" />
-                  <Label text="XXXXXXXXXXXXXXXXX" />
+                  <Label prefHeight="26.0" prefWidth="150.0" styleClass="smallfont" text="FIghter new status :" />
+                  <RadioButton fx:id="rbFunctional" mnemonicParsing="false" onAction="#rbFunctional_action" prefHeight="18.0" prefWidth="102.0" styleClass="labels" text="Functional" />
+                  <RadioButton fx:id="rbDamaged" mnemonicParsing="false" onAction="#rbDamaged_action" prefHeight="18.0" prefWidth="101.0" styleClass="labels" text="Damaged" />
+                  <RadioButton fx:id="rbWrecked" mnemonicParsing="false" onAction="#rbWrecked_action" prefHeight="18.0" prefWidth="93.0" styleClass="labels" text="Wrecked" />
+                  <RadioButton fx:id="rbDestroyed" mnemonicParsing="false" onAction="#rbDestroyed_action" prefHeight="18.0" prefWidth="85.0" styleClass="labels" text="Destroyed" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="127.0" styleClass="smallfont" text="Pilot new status :" />
+                  <RadioButton fx:id="rbSafe" mnemonicParsing="false" onAction="#rbSafe_action" prefHeight="18.0" prefWidth="63.0" styleClass="labels" text="Safe" />
+                  <RadioButton fx:id="rbWounded" mnemonicParsing="false" onAction="#rbWounded_action" prefHeight="18.0" prefWidth="93.0" styleClass="labels" text="Wounded" />
+                  <RadioButton fx:id="rbLost" mnemonicParsing="false" onAction="#rbLost_action" prefHeight="18.0" prefWidth="66.0" styleClass="labels" text="Lost" />
+                  <RadioButton fx:id="rbDead" mnemonicParsing="false" onAction="#rbDead_action" prefHeight="18.0" prefWidth="75.0" styleClass="labels" text="Dead" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="216.0" styleClass="smallfont" text="Ships destroyed by the pilot :" />
+                  <TextField fx:id="tfShips" prefHeight="26.0" prefWidth="59.0" />
                </children>
             </HBox>
             </children>
         </VBox>
-        <Button fx:id="btnCancel" layoutX="488.0" layoutY="336.0" mnemonicParsing="false" onAction="#btnCancel_action" text="Cancel" />
-        <Button fx:id="btnValidate" layoutX="398.0" layoutY="336.0" mnemonicParsing="false" onAction="#btnValidate_action" text="Validate" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="50.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+        <Button fx:id="btnCancel" layoutX="639.0" layoutY="440.0" mnemonicParsing="false" onAction="#btnCancel_action" text="Cancel" />
+        <Button fx:id="btnValidate" layoutX="555.0" layoutY="440.0" mnemonicParsing="false" onAction="#btnValidate_action" text="Validate" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="154.0" layoutX="35.0" layoutY="196.0" stroke="BLACK" strokeType="INSIDE" width="166.0" />
+      <Text layoutX="286.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="font" text="Modify Flight" />
+      <Button fx:id="btnRefresh" layoutX="99.0" layoutY="440.0" mnemonicParsing="false" onAction="#btnRefresh_action" prefHeight="26.0" prefWidth="75.0" text="Refresh" />
     </children>
 </AnchorPane>

@@ -2,50 +2,45 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.creationMenuFighterController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="main" stylesheets="@style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.creationMenuFighterController">
    <children>
-      <VBox layoutX="167.0" layoutY="116.0" prefHeight="133.0" prefWidth="280.0">
+      <VBox layoutX="152.0" layoutY="119.0" prefHeight="162.0" prefWidth="367.0" styleClass="smallfont" stylesheets="@style/style.css">
          <children>
-            <HBox prefHeight="30.0" prefWidth="100.0">
+            <HBox prefHeight="30.0" prefWidth="100.0" styleClass="smallfont" stylesheets="@style/style.css">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fighter ID :                     " />
-                  <Label text="XXXXX {default}" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Fighter ID :                     " />
+                  <Label styleClass="labels" stylesheets="@style/style.css" text="{Default}" />
                </children>
             </HBox>
-            <HBox prefHeight="39.0" prefWidth="100.0">
+            <HBox prefHeight="39.0" prefWidth="373.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fighter Model :              " />
-                  <SplitMenuButton mnemonicParsing="false" prefHeight="16.0" prefWidth="75.0" text="model">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                  </SplitMenuButton>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Fighter Model :              " />
+                  <RadioButton fx:id="rbHunter" mnemonicParsing="false" onAction="#rbHunter_action" prefHeight="26.0" prefWidth="97.0" styleClass="labels" stylesheets="@style/style.css" text="Hunter" />
+                  <RadioButton fx:id="rbXWing" mnemonicParsing="false" onAction="#rbXWing_action" prefHeight="26.0" prefWidth="106.0" styleClass="labels" stylesheets="@style/style.css" text="XWing" />
                </children>
             </HBox>
-            <HBox prefHeight="38.0" prefWidth="280.0">
+            <HBox prefHeight="38.0" prefWidth="377.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fighter status :              " />
-                  <Label prefHeight="18.0" prefWidth="160.0" text="Functional {default}" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Fighter status :              " />
+                  <Label prefHeight="18.0" prefWidth="160.0" styleClass="labels" stylesheets="@style/style.css" text="Functional {default}" />
                </children>
             </HBox>
             <HBox prefHeight="18.0" prefWidth="252.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fighter availability :   " wrappingWidth="126.065185546875" />
-                  <Label text="Available {Default}" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Fighter in flight :   " wrappingWidth="164.4652099609375" />
+                  <Label prefHeight="26.0" prefWidth="93.0" styleClass="labels" stylesheets="@style/style.css" text="No {Default}" />
                </children>
             </HBox>
          </children>
       </VBox>
-      <Text layoutX="103.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the model of the new Fighter">
+      <Text layoutX="54.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="font" text="Choose the model of the new Fighter">
          <font>
             <Font size="24.0" />
          </font>

@@ -1,1 +1,39 @@
+@font-face {
+    font-family:"ProstoOne-Regular";
+    src: url(Fonts/ProstoOne-Regular.ttf);
+}
+@font-face {
+    font-family:"ProstoOne-Regular";
+    src: url(Fonts/ProstoOne-Regular.ttf);
+}
+
+.main {
+    -fx-background-image:url('backgroung.png');
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-font-family:"SquadaOne-Regular";
+
+}
+.button{
+    -fx-background-color:#646FD4;
+}
+.font {
+    -fx-font-family:"ProstoOne-Regular";
+    -fx-font-size: 30;
+    -fx-fill:#646FD4;
+}
+
+.smallfont{
+    -fx-font-family:"ProstoOne-Regular";
+    -fx-fill:#646FD4;
+    -fx-font-size: 16;
+    -fx-text-fill:#646FD4;
+}
+
+.labels {
+    -fx-text-fill:#b3bcd1;
+}
+
+
+
 

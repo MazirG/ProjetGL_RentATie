@@ -1,6 +1,5 @@
 package login;
 
-import bdd.Request;
 import status.PilotStatus;
 
 public class Pilot extends User{
@@ -76,10 +75,6 @@ public class Pilot extends User{
     public PilotStatus getStatus() {
         return this.status;
     }
-
-    /* public void displayHistory() {
-        Request.displayHistory(this.pilotID);
-    } */
 
     @Override
     public String toString() {

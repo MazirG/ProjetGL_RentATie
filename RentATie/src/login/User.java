@@ -1,7 +1,6 @@
 package login;
 
 import bCrypt.BCrypt;
-import bdd.Request;
 public class User {
 
     private int id;
@@ -28,12 +27,6 @@ public class User {
     public String getHashed() {
         return hashed;
     }
-
-    // Connection à la bdd
-   /* public void getConnection() throws Exception {
-        Request.getConnection();
-    }
-    */
 
 }
 

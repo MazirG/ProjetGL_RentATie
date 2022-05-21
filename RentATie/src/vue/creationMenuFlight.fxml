@@ -10,54 +10,48 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="439.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.creationMenuFlightController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="main" stylesheets="@style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.creationMenuFlightController">
    <children>
-      <VBox layoutX="145.0" layoutY="63.0" prefHeight="302.0" prefWidth="325.0">
+      <VBox layoutX="126.0" layoutY="80.0" prefHeight="240.0" prefWidth="364.0">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="50.0" prefWidth="346.0" styleClass="smallfont" stylesheets="@style/style.css">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flight ID " />
-                  <Label text="XXXX {Default}" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Flight ID :" wrappingWidth="69.3773193359375" />
+                  <Label styleClass="labels" stylesheets="@style/style.css" text=" {Default}" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="53.0" prefWidth="346.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flight name " />
-                  <TextField fx:id="tfName" promptText="Enter a name..." />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Flight name :" wrappingWidth="94.47772216796875" />
+                  <TextField fx:id="tfName" prefHeight="26.0" prefWidth="198.0" promptText="Enter a name..." />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="50.0" prefWidth="346.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rent beginning date " />
-                  <DatePicker fx:id="tfBeginDate" prefHeight="26.0" prefWidth="125.0" promptText="Enter a date..." />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Rent beginning date :" wrappingWidth="157.7340087890625" />
+                  <DatePicker fx:id="tfBeginDate" prefHeight="26.0" prefWidth="162.0" promptText="Enter a date..." />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="47.0" prefWidth="346.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rent ending date " />
-                  <DatePicker fx:id="tfEndDate" prefHeight="26.0" prefWidth="134.0" promptText="Enter a date..." />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Rent ending date :" wrappingWidth="134.58203125" />
+                  <DatePicker fx:id="tfEndDate" prefHeight="25.0" prefWidth="182.0" promptText="Enter a date..." />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="42.0" prefWidth="354.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fighter back date" />
-                  <Label text="TO BE DETERMINED {Default}" />
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flight duration " />
-                  <Label text="0 {Default}" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Fighter back date :" wrappingWidth="135.892578125" />
+                  <Label styleClass="labels" stylesheets="@style/style.css" text="TO BE DETERMINED {Default}" />
                </children>
             </HBox>
          </children>
       </VBox>
-      <Text layoutX="52.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter the Flight name and the dates of the rent">
+      <Text layoutX="55.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="font" text="Enter Flight name and dates of rent" textAlignment="CENTER" wrappingWidth="505.102783203125">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Button fx:id="btnValidate" layoutX="333.0" layoutY="387.0" mnemonicParsing="false" onAction="#btnValidate_action" text="Validate" />
-      <Button fx:id="btnCancel" layoutX="484.0" layoutY="387.0" mnemonicParsing="false" onAction="#btnCancel_action" text="Cancel" />
+      <Button fx:id="btnCancel" layoutX="500.0" layoutY="344.0" mnemonicParsing="false" onAction="#btnCancel_action" text="Cancel" />
+      <Button fx:id="btnValidate" layoutX="421.0" layoutY="344.0" mnemonicParsing="false" onAction="#btnValidate_action" text="Validate" />
    </children>
 </AnchorPane>

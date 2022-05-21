@@ -13,8 +13,21 @@ public class Flight {
         private String endRent;
         private String endFlight;
 
+        private int flightDuration;
 
-        public Flight(int flightID, int pilotID, TieModel fighterModel, int fighterID, String missionName, String start, String endRent, String endFlight) {
+    public void setPilotID(int pilotID) {
+        this.pilotID = pilotID;
+    }
+
+    public TieModel getFighterModel() {
+        return fighterModel;
+    }
+
+    public void setFighterModel(TieModel fighterModel) {
+        this.fighterModel = fighterModel;
+    }
+
+    public Flight(int flightID, int pilotID, TieModel fighterModel, int fighterID, String missionName, String start, String endRent, String endFlight, int flightDuration) {
             this.flightID = flightID;
             this.pilotID=pilotID;
             this.fighterModel=fighterModel;
@@ -23,6 +36,7 @@ public class Flight {
             this.start = start;
             this.endRent = endRent;
             this.endFlight = endFlight;
+            this.flightDuration= flightDuration;
         }
 
         public int getFlightID() {
@@ -66,6 +80,14 @@ public class Flight {
         public void setFighterID(int fighterID) {
             this.fighterID = fighterID;
         }
+
+    public int getFlightDuration() {
+        return flightDuration;
+    }
+
+    public void setFlightDuration(int flightDuration) {
+        this.flightDuration = flightDuration;
+    }
 
     @Override
     public String toString() {

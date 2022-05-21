@@ -17,7 +17,10 @@ import status.UserPost;
 
 import java.io.FileInputStream;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.temporal.Temporal;
 import java.util.Properties;
 
 import static status.FighterStatus.Destroyed;
@@ -44,24 +47,6 @@ public class Request {
         return null;
     }
 
-    public static boolean displayUserTable(){
-        try{
-            Connection con = getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rst = stmt.executeQuery("SELECT * FROM User");
-
-            //on affiche les lignes
-
-            while (rst.next())
-                System.out.println(rst.getInt(1) + " "+ rst.getString(2) + " "+ rst.getString(5) );
-            return true;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     // afficher les tables, passer en paramètre l'attribut selon lequel on trie les lignes
 
     public static ObservableList displayPilotTable(){
@@ -81,6 +66,7 @@ public class Request {
                 Pilot pilot = new Pilot(rst.getInt(1), rst.getString(2), rst.getInt(3), ps, rst.getInt(5), rst.getInt(6), rst.getBoolean(7));
                 pilots.add(pilot);
             }
+            con.close();
 
             return pilots;
 
@@ -110,6 +96,8 @@ public class Request {
                 fighters.add(tiefighter);
             }
 
+            con.close();
+
             return fighters;
 
         } catch (Exception e) {
@@ -124,22 +112,84 @@ public class Request {
         try{
             Connection con = getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rst = stmt.executeQuery("SELECT * FROM Flight");
+            ResultSet rst = stmt.executeQuery("SELECT flightID FROM Flight WHERE endFlight IS NULL");
 
-            //on affiche les lignes
+            while (rst.next()) {
+                int flightID = rst.getInt(1);
+                updateFlightDuration(flightID);
+            }
+
+            rst = stmt.executeQuery("SELECT * FROM Flight");
 
             while (rst.next()) {
                 String model = rst.getString(3);
-                TieModel tm = TieModel.valueOf(model);
-                Flight flight = new Flight(rst.getInt(1), rst.getInt(2), tm, rst.getInt(4),rst.getString(5),rst.getString(6),rst.getString(8),rst.getString(8));
+                TieModel tieModel = TieModel.valueOf(model);
+                Flight flight = new Flight(rst.getInt(1), rst.getInt(2), tieModel, rst.getInt(4),rst.getString(5),rst.getString(6),rst.getString(7),rst.getString(8), rst.getInt(9));
                 flights.add(flight);
             }
+
+            con.close();
 
             return flights;
 
         } catch (Exception e) {
             e.printStackTrace();
             return flights;
+        }
+    }
+
+    //met à jour la flight duration
+
+    public static boolean updateFlightDuration(int flightID){
+
+        try{
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rst = stmt.executeQuery("SELECT endFlight FROM Flight WHERE flightID='"+flightID+"'");
+            rst.next();
+
+            Date dateEndFlight = rst.getDate(1);
+
+            if (dateEndFlight == null) {
+
+                rst = stmt.executeQuery("SELECT start FROM Flight WHERE flightID='"+flightID+"'");
+                rst.next();
+
+                Date startDate = rst.getDate(1);
+                Date date_of_today = Date.valueOf(LocalDate.now());
+
+                long difference_In_Time = date_of_today.getTime() - startDate.getTime();
+
+                int flightDuration = (int) ((difference_In_Time / (1000 * 60 * 60 * 24)) % 365);
+
+                if (flightDuration < 0){
+
+                    PreparedStatement pstmt = con.prepareStatement("UPDATE Flight SET flightDuration='"+0+"' WHERE flightID="+flightID);
+                    pstmt.executeUpdate();
+
+                } else {
+
+                    PreparedStatement pstmt2 = con.prepareStatement("UPDATE Flight SET flightDuration='"+flightDuration+"' WHERE flightID="+flightID);
+                    pstmt2.executeUpdate();
+
+                }
+
+                System.out.println("Flight duration mise à jour.");
+                con.close();
+
+                return true;
+
+            }
+            else{
+                System.out.println("Le vol est terminé.");
+                con.close();
+
+                return false;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
@@ -222,8 +272,11 @@ public class Request {
 
     //Assigne un vol en prenant un pilote et un vaisseau
 
-    public static boolean assignFlight(int pilotID, int fighterID, String mission, String startDate, String endRent) throws Exception{
+    public static boolean assignFlight(int pilotID, int fighterID, String mission, String sStartDate, String sEndRent) throws Exception{
         try{
+            LocalDate startDate = LocalDate.parse(sStartDate);
+            LocalDate endRent = LocalDate.parse(sEndRent);
+
             Connection con = getConnection();
 
             //on vérifie la disponibilité du vaisseau
@@ -308,14 +361,16 @@ public class Request {
             Connection con = getConnection();
 
             //on vérifie que le pilote n'est pas en vol
+
             Statement stmt = con.createStatement();
-            ResultSet rst = stmt.executeQuery("SELECT COUNT(*) FROM Pilote WHERE id="+id);
+            ResultSet rst = stmt.executeQuery("SELECT inFlight FROM Pilote WHERE id="+id);
             rst.next();
 
             if (rst.getBoolean(1)==false){
             PreparedStatement pstmt1 = con.prepareStatement("DELETE FROM User WHERE id="+id);
             pstmt1.executeUpdate();
-            return true;} else {
+            return true;
+            } else {
                 System.out.println("Le pilote est en vol");
                 return false;}
 
@@ -328,7 +383,7 @@ public class Request {
         }
     }
 
-    // ca sert à rien
+    // modifie l'âge du pilote
 
     public static boolean modifyPilotAge(int id, int Age){
         try{
@@ -377,6 +432,26 @@ public class Request {
         }
     }
 
+    // on retourne l'username associé à l'id
+
+    public static String username(int id){
+        try{
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+
+            ResultSet rst = stmt.executeQuery("SELECT username FROM User WHERE id='"+id+"'");
+            rst.next();
+
+            String username = rst.getString(1);
+
+            return username;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
     //Changer le statut des vaisseaux et des pilotes librement
     public static boolean modifyFighterStatus(int id, FighterStatus Status){
         try{
@@ -419,7 +494,7 @@ public class Request {
             PreparedStatement pstmt = con.prepareStatement("UPDATE TieFighter SET status='"+Status+"' WHERE fighterID="+id);
             pstmt.executeUpdate();
 
-            PreparedStatement pstmt1 = con.prepareStatement("UPDATE TieFighter SET inFlight=0 WHERE fighterID= (SELECT fighterID FROM Flight WHERE flightID=" + id + ")");
+            PreparedStatement pstmt1 = con.prepareStatement("UPDATE TieFighter SET inFlight=0 WHERE fighterID="+id);
             pstmt1.executeUpdate();
 
             return true;
@@ -462,15 +537,25 @@ public class Request {
         try {
             Connection con = getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rst = stmt.executeQuery("select * from Flight where pilotUsername="+pilotID);
+            ResultSet rst = stmt.executeQuery("SELECT flightID FROM Flight WHERE endFlight IS NULL AND pilotID="+pilotID);
+
+            while (rst.next()) {
+                int flightID = rst.getInt(1);
+                updateFlightDuration(flightID);
+            }
+
+            rst = stmt.executeQuery("SELECT * FROM Flight WHERE pilotID="+pilotID);
 
             while (rst.next()) {
                 String model = rst.getString(3);
                 TieModel tm = TieModel.valueOf(model);
-                Flight flight = new Flight(rst.getInt(1), rst.getInt(2), tm, rst.getInt(4), rst.getString(5), rst.getString(6), rst.getString(8), rst.getString(8));
+                Flight flight = new Flight(rst.getInt(1), rst.getInt(2), tm, rst.getInt(4), rst.getString(5), rst.getString(6), rst.getString(7), rst.getString(8), rst.getInt(9));
                 flights.add(flight);
             }
+            con.close();
+
             return flights;
+
         }  catch (Exception e) {
             e.printStackTrace();
             return flights;
@@ -479,7 +564,7 @@ public class Request {
 
     //Vol terminé, on met à jour le statut du vaisseau et celui de pilote
 
-    public static boolean flightDone(int id, PilotStatus Pstatus, FighterStatus Fstatus){
+    public static boolean flightDone(int id, PilotStatus Pstatus, FighterStatus Fstatus, int shipDestroyed){
 
         //create an object for date
         LocalDate date_of_today = LocalDate.now();
@@ -498,38 +583,30 @@ public class Request {
                 PreparedStatement pstmt = con.prepareStatement("UPDATE Flight SET endFlight='" + date_of_today + "' WHERE flightID=" + id);
                 pstmt.executeUpdate();
 
-                ResultSet rst3 = stmt.executeQuery("SELECT endRent FROM Flight WHERE FlightID ="+id);
-                rst3.next();
-                Date dateEndRent = rst3.getDate(1);
-
                 ResultSet rst1 = stmt.executeQuery("SELECT pilotID FROM Flight WHERE flightID ="+ id);
                 rst1.next();
                 int Pid = rst1.getInt(1);
-
-                ResultSet rst4 = stmt.executeQuery("SELECT endFlight FROM Flight WHERE flightID = "+id);
-                rst4.next();
-                Date endFlight = rst4.getDate(1);
-
-                if(endFlight.after(dateEndRent)) {
-                    DonePilotStatus(Pid, Dead);
-                } else {
-                    DonePilotStatus(Pid,Pstatus);
-                }
+                DonePilotStatus(Pid,Pstatus);
 
                 ResultSet rst2 = stmt.executeQuery("SELECT fighterID FROM Flight WHERE flightID=" + id);
                 rst2.next();
                 int Fid = rst2.getInt(1);
                 DoneFighterStatus(Fid, Fstatus);
 
-                if (Fstatus == Destroyed){
-                    PreparedStatement pstmt2 = con.prepareStatement("UPDATE Pilote SET shipDestroyed=shipDestroyed+1 WHERE id="+Pid);
-                    pstmt2.executeUpdate();
-                }
+                ResultSet rst5 = stmt.executeQuery("SELECT shipDestroyed FROM Pilote WHERE id=" + Pid);
+                rst5.next();
+
+                int shipDestroyedSaved = rst5.getInt(1);
+                shipDestroyedSaved = (shipDestroyedSaved + shipDestroyed );
+
+                PreparedStatement pstmt2 = con.prepareStatement("UPDATE Pilote SET shipDestroyed='"+shipDestroyedSaved+"' WHERE id="+Pid);
+                pstmt2.executeUpdate();
+                return true;
 
             } else {
                 System.out.println("Flight already done");
+                return false;
             }
-            return true;
         } catch (Exception e) {
             System.out.println(e);
             return false;

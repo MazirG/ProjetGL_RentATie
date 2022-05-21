@@ -1,13 +1,12 @@
-package testJUnit;/*package testJUnit;
+package testJUnit;
 
 import fly.*;
 import org.junit.jupiter.api.Assertions;
-
-import static status.TieModel.*;
+import status.TieModel;
 
 class FlightTest {
 
-    Flight flightTest = new Flight(7,1,XWing,2,"Mission2","03/10/2021","15/10/2021","14/10/2021");
+    Flight flightTest = new Flight(7,10, TieModel.Reaper, 3,"Mission2","03/10/2021","15/10/2021","14/10/2021", 0);
 
     @org.junit.jupiter.api.Test
     void getFlightIDTest() {
@@ -81,15 +80,15 @@ class FlightTest {
 
     @org.junit.jupiter.api.Test
     void getPilotIDTest() {
-        int pilotID = flightTest.getPilotID();
-        Assertions.assertEquals(1, pilotID);
+        int iDPilot = flightTest.getPilotID();
+        Assertions.assertEquals(10, iDPilot);
 
     }
 
     @org.junit.jupiter.api.Test
     void getFighterIdTest() {
         int fighterId= flightTest.getFighterID();
-        Assertions.assertEquals(2,fighterId);
+        Assertions.assertEquals(3,fighterId);
     }
 
     @org.junit.jupiter.api.Test
@@ -100,4 +99,19 @@ class FlightTest {
 
     }
 
-}*/
+    @org.junit.jupiter.api.Test
+    void getFlightDurationTest() {
+        int flightDuration= flightTest.getFlightDuration();
+        Assertions.assertEquals(0,flightDuration);
+    }
+
+    @org.junit.jupiter.api.Test
+    void setFlightDurationTest() {
+        flightTest.setFlightDuration(8);
+        int flightDuration= flightTest.getFlightDuration();
+        Assertions.assertEquals(8,flightDuration);
+
+    }
+
+
+}

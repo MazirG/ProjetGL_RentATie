@@ -10,60 +10,61 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="560.0" prefWidth="762.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.modifyMenuPilotController">
+<AnchorPane prefHeight="500.0" prefWidth="748.8" styleClass="main" stylesheets="@style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.modifyMenuPilotController">
     <children>
-        <VBox layoutX="255.0" layoutY="50.0" prefHeight="274.0" prefWidth="476.0">
+        <VBox layoutX="262.0" layoutY="124.0" prefHeight="251.0" prefWidth="434.0">
             <children>
-                <HBox prefHeight="100.0" prefWidth="200.0">
+                <HBox prefHeight="100.0" prefWidth="200.0" styleClass="smallfont">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pilot ID : " />
-                        <Label text="XXXXXXXX" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Pilot ID : " />
+                        <Label fx:id="labelID" styleClass="labels" text="XXXXXXXX" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0" styleClass="smallfont">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Pilot name:" />
+                        <Label fx:id="labelName" styleClass="labels" text="XXXXXXXX" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0" styleClass="smallfont">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Number of flights : " />
+                        <Label fx:id="labelFlights" styleClass="labels" text="XXXXXXXX" />
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pilot name:" />
-                        <Label text="XXXXXXXX" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Pilot age : " wrappingWidth="75.541015625" />
+                  <TextField fx:id="tfAge" prefHeight="9.0" prefWidth="90.0" />
                     </children>
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0">
+                <HBox prefHeight="100.0" prefWidth="200.0" styleClass="smallfont">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pilot age : " />
-                        <Label text="XXXXXXXX" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Pilot status : " />
+                  <RadioButton fx:id="rbSafe" mnemonicParsing="false" onAction="#rbSafe_action" prefHeight="26.0" prefWidth="74.0" styleClass="labels" text="Safe" />
+                  <RadioButton fx:id="rbWounded" mnemonicParsing="false" onAction="#rbWounded_action" prefHeight="26.0" prefWidth="109.0" styleClass="labels" text="Wounded" />
+                  <RadioButton fx:id="rbLost" mnemonicParsing="false" onAction="#rbLost_action" prefHeight="26.0" prefWidth="70.0" styleClass="labels" text="Lost" />
+                  <RadioButton fx:id="rbDead" mnemonicParsing="false" onAction="#rbDead_action" styleClass="labels" text="Dead" />
                     </children>
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0">
+                <HBox prefHeight="100.0" prefWidth="200.0" styleClass="smallfont">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of flights : " />
-                        <Label text="XXXXXXXX" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Pilot in flight : " wrappingWidth="111.77032470703125" />
+                  <Label fx:id="labelInFlight" prefHeight="18.0" prefWidth="63.0" styleClass="labels" text="No" />
                     </children>
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0">
+                <HBox prefHeight="41.0" prefWidth="190.0" styleClass="smallfont">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pilot status : " />
-                  <RadioButton fx:id="rbSafe" mnemonicParsing="false" onAction="#rbSafe_action" prefHeight="18.0" prefWidth="89.0" text="safe" />
-                  <RadioButton fx:id="rbWounded" mnemonicParsing="false" onAction="#rbWounded_action" prefHeight="18.0" prefWidth="101.0" text="wounded" />
-                  <RadioButton fx:id="rbLost" mnemonicParsing="false" onAction="#rbLost_action" prefHeight="18.0" prefWidth="102.0" text="lost" />
-                  <RadioButton fx:id="rbDead" mnemonicParsing="false" onAction="#rbDead_action" text="dead" />
-                    </children>
-                </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pilot in flight : " />
-                  <RadioButton fx:id="rbYes" mnemonicParsing="false" onAction="#rbYes_action" prefHeight="18.0" prefWidth="80.0" text="yes" />
-                  <RadioButton fx:id="rbNo" mnemonicParsing="false" onAction="#rbNo_action" prefHeight="18.0" prefWidth="104.0" text="no" />
-                    </children>
-                </HBox>
-                <HBox prefHeight="41.0" prefWidth="190.0">
-                    <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ships destroyed : " />
-                  <TextField fx:id="tfShip" prefHeight="31.0" prefWidth="86.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Ships destroyed : " wrappingWidth="131.93316650390625" />
+                  <Label fx:id="labelShipsDestroyed" prefHeight="18.0" prefWidth="153.0" styleClass="labels" text="XXXXXXXXXXXXXXX" />
                     </children>
                 </HBox>
             </children>
         </VBox>
-        <Button fx:id="btnCancel" layoutX="488.0" layoutY="336.0" mnemonicParsing="false" onAction="#btnCancel_action" text="Cancel" />
-        <Button fx:id="btnValidate" layoutX="381.0" layoutY="336.0" mnemonicParsing="false" onAction="#btnValidate_action" text="Validate" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="22.0" layoutY="78.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+        <Button fx:id="btnCancel" layoutX="620.0" layoutY="429.0" mnemonicParsing="false" onAction="#btnCancel_action" text="Cancel" />
+        <Button fx:id="btnValidate" layoutX="536.0" layoutY="429.0" mnemonicParsing="false" onAction="#btnValidate_action" text="Validate" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="38.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Button fx:id="btnRefresh" layoutX="110.0" layoutY="429.0" mnemonicParsing="false" onAction="#btnRefresh_action" text="Refresh" />
+      <Text layoutX="294.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="font" text="Modify Pilot" />
     </children>
 </AnchorPane>
