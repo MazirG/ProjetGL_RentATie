@@ -119,6 +119,8 @@ public abstract class Controller {
             fxml = FXMLLoader.load(getClass().getResource(pageName));
             Scene scene = new Scene(fxml);
             home.setScene(scene);
+            home.setResizable(false);
+            home.sizeToScene();
             home.show();
         }
         catch (Exception e){
@@ -191,6 +193,8 @@ public abstract class Controller {
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.sizeToScene();
             stage.show();
 
         }

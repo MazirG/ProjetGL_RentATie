@@ -251,21 +251,21 @@ public class menuOfficerController extends Controller implements Initializable {
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (String.valueOf(flight.getFlightID()).indexOf(lowerCaseFilter)!=-1)
+                if (String.valueOf(flight.getFlightID()).indexOf(lowerCaseFilter) != -1)
                     return true;
-                else if (flight.getMissionName().toLowerCase().indexOf(lowerCaseFilter) != -1 )
+                else if (flight.getMissionName().toLowerCase().indexOf(lowerCaseFilter) != -1)
                     return true;
-                else if (flight.getStart().toLowerCase().indexOf(lowerCaseFilter) != -1 )
+                else if (flight.getStart().toLowerCase().indexOf(lowerCaseFilter) != -1)
                     return true;
-                else if (flight.getEndFlight().toLowerCase().indexOf(lowerCaseFilter) != -1 )
+                //else if (flight.getEndFlight().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                    //return true;
+                else if (String.valueOf(flight.getPilotID()).indexOf(lowerCaseFilter) != -1)
                     return true;
-                else if (String.valueOf(flight.getPilotID()).indexOf(lowerCaseFilter)!=-1)
+                else if (String.valueOf(flight.getFighterID()).indexOf(lowerCaseFilter) != -1)
                     return true;
-                else if (String.valueOf(flight.getFighterID()).indexOf(lowerCaseFilter)!=-1)
+                else if (flight.getEndRent().toLowerCase().indexOf(lowerCaseFilter) != -1)
                     return true;
-                else if (flight.getEndRent().toLowerCase().indexOf(lowerCaseFilter) != -1 )
-                    return true;
-                else if (String.valueOf(flight.getFlightDuration()).indexOf(lowerCaseFilter)!=-1)
+                if (String.valueOf(flight.getFlightDuration()).indexOf(lowerCaseFilter) != -1)
                     return true;
                 else
                     return false;
