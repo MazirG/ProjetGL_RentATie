@@ -10,19 +10,19 @@
             <children>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Tie ID : " wrappingWidth="164.23431396484375" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Tie ID : " wrappingWidth="110.23431396484375" />
                         <Label fx:id="labelID" styleClass="labels" stylesheets="@style/style.css" text="XXXXXXXX" />
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Tie model : " wrappingWidth="167.378173828125" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Tie model : " wrappingWidth="118.378173828125" />
                         <Label fx:id="labelModel" styleClass="labels" text="XXXXXXXX" />
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Tie in flight :" wrappingWidth="167.18914794921875" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Tie in flight :" wrappingWidth="116.18914794921875" />
                   <Label fx:id="labelInFlight" styleClass="labels" text="No" />
                     </children>
                 </HBox>
