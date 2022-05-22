@@ -49,7 +49,7 @@
                 </HBox>
                 <HBox prefHeight="41.0" prefWidth="190.0" styleClass="smallfont">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Ships destroyed : " wrappingWidth="131.93316650390625" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Enemy ships destroyed : " wrappingWidth="188.93316650390625" />
                   <Label fx:id="labelShipsDestroyed" prefHeight="18.0" prefWidth="153.0" styleClass="labels" text="XXXXXXXXXXXXXXX" />
                     </children>
                 </HBox>
