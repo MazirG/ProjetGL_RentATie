@@ -1,4 +1,4 @@
-Description des dossiers du projets et instructions pour le lancement de l'application :
+Description des dossiers du projet et instructions pour le lancement de l'application :
 
 Dans le dossier Fichiers :
     - Javadoc de l'application nommée "RentATieJavadoc", pour l'ouvrir il faut ouvrir le fichier index.html .
@@ -13,7 +13,7 @@ Pour lancer les tests :
     - Utiliser JUnit 5.
 
 Pour lancer l'application :
-    - Intégré la librairie mysql-connector-java-8.0.28 (dossier compréssé se trouve dans le dossier RentATie).
+    - Intégrer la librairie mysql-connector-java-8.0.28 (le dossier compréssé se trouve dans le dossier RentATie).
     - Lancer la class Main du package main situé ici : RentATie/src/main.
     - La partie "Application finale" du rapport peut servir de guide pour l'application.
     - Pour se connecter en tant qu'officer : username = Pseudo1
@@ -24,4 +24,4 @@ Pour lancer l'application :
 
 Remarques :
     - Le package bCrypt utilisé pour le cryptage des mots de passe à été récupéré sur internet (la source se trouve dans les commentaires de la classe BCrypt).
-    - Dans le dossier RentATie/ressources se trouve un fichier conf.properties qui contient les logs pour se connecter à la base de donnée.
+    - Dans le dossier RentATie/ressources se trouve un fichier conf.properties qui contient les logs pour se connecter à la base de donnée (la connexion est automatique dans l'application).
