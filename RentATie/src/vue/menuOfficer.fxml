@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="585.0" prefWidth="878.0" styleClass="main" stylesheets="@style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.menuOfficerController">
+<AnchorPane prefHeight="585.0" prefWidth="878.0" styleClass="main" stylesheets="@style/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.menuOfficerController">
    <children>
       <TextField fx:id="searchBar" layoutX="546.0" layoutY="38.0" prefHeight="26.0" prefWidth="210.0" promptText="Search a property ..." styleClass="textfield" stylesheets="@style/textField.css" />
       <HBox layoutX="61.0" layoutY="146.0" prefHeight="26.0" prefWidth="390.0" styleClass="smallfont" stylesheets="@style/style.css">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Display :  " />
-            <CheckBox fx:id="cbFighter" mnemonicParsing="false" onMouseClicked="#cbFighter_checked" prefHeight="26.0" prefWidth="120.0" styleClass="labels" stylesheets="@style/style.css" text="TieFighters  " />
+            <CheckBox fx:id="cbFighter" mnemonicParsing="false" onMouseClicked="#cbFighter_checked" prefHeight="26.0" prefWidth="78.0" styleClass="labels" stylesheets="@style/style.css" text="Tie  " />
             <CheckBox fx:id="cbPilot" mnemonicParsing="false" onMouseClicked="#cbPilot_checked" prefHeight="26.0" prefWidth="91.0" styleClass="labels" stylesheets="@style/style.css" text="Pilots  " />
             <CheckBox fx:id="cbFlight" mnemonicParsing="false" onMouseClicked="#cbFlight_checked" prefHeight="26.0" prefWidth="95.0" styleClass="labels" stylesheets="@style/style.css" text="Flights" />
          </children>
