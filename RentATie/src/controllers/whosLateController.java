@@ -56,7 +56,7 @@ public class whosLateController extends Controller implements Initializable {
 
 
     /**
-     * Action of the "See late flights" checkbox:
+     * Action of the "Refresh" button:
      * Prints Flight that are late (with FlightLate objects) with the ObservableList transfered in the Officer menu
      * Changes the search options for the search bar so that it is adapted to the FlightLate information of the table
      */
