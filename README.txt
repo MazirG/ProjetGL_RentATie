@@ -1,20 +1,21 @@
 Description des dossiers du projets et instructions pour le lancement de l'application :
 
 Dans le dossier Fichiers :
-    - Javadoc de l'application nommée "RentATieJavadoc", pour l'ouvrir il faut ouvrir le fichier index.html
-    - Un compte rendu des tests JUnit réalisés
+    - Javadoc de l'application nommée "RentATieJavadoc", pour l'ouvrir il faut ouvrir le fichier index.html .
+    - Un compte rendu des tests JUnit réalisés.
+    - Le rapport du projet.
 
 Dans le dossier UML :
-    - Diagrammes réalisés avec starUML au début du projet (fichiers en .mdj)
-    - Diagrammes de classes haut niveau et bas niveau (en .png) générés grâce au plugin "Diagrams" d'IntelliJ
+    - Diagrammes réalisés avec starUML au début du projet (fichiers en .mdj).
+    - Diagrammes de classes haut niveau et bas niveau (en .png) générés grâce au plugin "Diagrams" d'IntelliJ.
 
 Pour lancer les tests :
-    - Utiliser JUnit 5
+    - Utiliser JUnit 5.
 
 Pour lancer l'application :
-    - Intégré la librairie mysql-connector-java-8.0.28 (dossier compréssé se trouve dans le dossier RentATie)
-    - Lancer la class Main du package main situé ici : RentATie/src/main
-    - La partie "Application finale" du rapport peut servir de guide pour l'application
+    - Intégré la librairie mysql-connector-java-8.0.28 (dossier compréssé se trouve dans le dossier RentATie).
+    - Lancer la class Main du package main situé ici : RentATie/src/main.
+    - La partie "Application finale" du rapport peut servir de guide pour l'application.
     - Pour se connecter en tant qu'officer : username = Pseudo1
                                                  mdp  = 123
 
