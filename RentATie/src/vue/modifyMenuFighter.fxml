@@ -6,34 +6,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="500.0" prefWidth="748.8" styleClass="main" stylesheets="@style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.modifyMenuFighterController">
     <children>
-        <VBox layoutX="209.0" layoutY="147.0" prefHeight="231.0" prefWidth="512.0" styleClass="smallfont" stylesheets="@style/style.css">
+        <VBox layoutX="114.0" layoutY="119.0" prefHeight="262.0" prefWidth="541.0" styleClass="smallfont" stylesheets="@style/style.css">
             <children>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="FIghter ID : " />
-                        <Label styleClass="labels" stylesheets="@style/style.css" text="XXXXXXXX" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="TieFighter ID : " wrappingWidth="146.23431396484375" />
+                        <Label fx:id="labelID" styleClass="labels" stylesheets="@style/style.css" text="XXXXXXXX" />
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Fighter model : " />
-                        <Label styleClass="labels" text="XXXXXXXX" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="TieFighter model : " wrappingWidth="144.378173828125" />
+                        <Label fx:id="labelModel" styleClass="labels" text="XXXXXXXX" />
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Fighter in flight :" wrappingWidth="121.9891357421875" />
-                  <Label styleClass="labels" text="No" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="TieFighter in flight :" wrappingWidth="145.18914794921875" />
+                  <Label fx:id="labelInFlight" styleClass="labels" text="No" />
                     </children>
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0">
+                <HBox prefHeight="74.0" prefWidth="525.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Fighter status : " wrappingWidth="108.012451171875" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="TieFighter status : " wrappingWidth="133.61248779296875" />
                   <RadioButton fx:id="rbFunctional" mnemonicParsing="false" onAction="#rbFunctional_action" prefHeight="26.0" prefWidth="117.0" styleClass="labels" text="Functional" />
                   <RadioButton fx:id="rbDamaged" mnemonicParsing="false" onAction="#rbDamaged_action" prefHeight="26.0" prefWidth="104.0" styleClass="labels" text="Damaged" />
                   <RadioButton fx:id="rbWreck" mnemonicParsing="false" onAction="#rbWreck_action" prefHeight="18.0" prefWidth="80.0" styleClass="labels" text="Wreck" />
@@ -44,8 +43,7 @@
         </VBox>
         <Button fx:id="btnCancel" layoutX="640.0" layoutY="437.0" mnemonicParsing="false" onAction="#btnCancel_action" text="Cancel" />
         <Button fx:id="btnValidate" layoutX="539.0" layoutY="437.0" mnemonicParsing="false" onAction="#btnValidate_action" text="Validate" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="166.0" layoutX="33.0" layoutY="167.0" stroke="BLACK" strokeType="INSIDE" width="162.0" />
-      <Text layoutX="277.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="font" text="Modify Fighter" />
+      <Text layoutX="257.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="font" text="Modify TieFighter" />
       <Button fx:id="btnRefresh" layoutX="114.0" layoutY="437.0" mnemonicParsing="false" onAction="#btnRefresh_action" text="Refresh" />
     </children>
 </AnchorPane>

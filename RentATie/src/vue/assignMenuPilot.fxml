@@ -8,25 +8,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="main" stylesheets="@style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.assignMenuPilotController">
+<AnchorPane prefHeight="425.0" prefWidth="636.0" styleClass="main" stylesheets="@style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.assignMenuPilotController">
     <children>
-        <Button fx:id="btnCancel" layoutX="424.0" layoutY="341.0" mnemonicParsing="false" onAction="#btnCancel_action" text="Cancel" />
-        <Button fx:id="btnValidate" layoutX="504.0" layoutY="341.0" mnemonicParsing="false" onAction="#btnValidate_action" text="Validate" />
-        <TextField fx:id="searchBar" layoutX="41.0" layoutY="86.0" promptText="Search a pilot by name..." styleClass="textfield" stylesheets="@style/textField.css" />
+        <Button fx:id="btnCancel" layoutX="360.0" layoutY="354.0" mnemonicParsing="false" onAction="#btnCancel_action" prefHeight="26.0" prefWidth="86.0" text="Cancel" />
+        <Button fx:id="btnValidate" layoutX="486.0" layoutY="354.0" mnemonicParsing="false" onAction="#btnValidate_action" prefHeight="26.0" prefWidth="94.0" text="Validate" />
+        <TextField fx:id="searchBar" layoutX="41.0" layoutY="86.0" prefHeight="26.0" prefWidth="164.0" promptText="Search a pilot by name..." styleClass="textfield" stylesheets="@style/textField.css" />
       <Text layoutX="151.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="font" text="Choose a pilot to assign">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TableView fx:id="tableItems" layoutX="30.0" layoutY="127.0" prefHeight="200.0" prefWidth="540.0" stylesheets="@style/tablesStyle.css">
+      <TableView fx:id="tableItems" layoutX="23.0" layoutY="131.0" prefHeight="200.0" prefWidth="590.0" stylesheets="@style/tablesStyle.css">
         <columns>
           <TableColumn fx:id="cId" prefWidth="38.4000244140625" text="id" />
           <TableColumn fx:id="cName" prefWidth="80.800048828125" text="name" />
             <TableColumn fx:id="cAge" minWidth="9.5999755859375" prefWidth="53.60003662109375" text="age" />
-            <TableColumn fx:id="cInFlight" minWidth="0.0" prefWidth="58.39996337890625" text="inFlight" />
-            <TableColumn fx:id="cStatus" minWidth="0.0" prefWidth="47.20001220703125" text="status" />
-            <TableColumn fx:id="cTotalFlight" prefWidth="112.79998779296875" text="total-flight" />
-            <TableColumn fx:id="cShipsDestroyed" prefWidth="151.20001220703125" text="ships-destroyed" />
+            <TableColumn fx:id="cInFlight" minWidth="0.0" prefWidth="79.199951171875" text="inFlight" />
+            <TableColumn fx:id="cStatus" minWidth="0.0" prefWidth="76.0" text="status" />
+            <TableColumn fx:id="cTotalFlight" prefWidth="107.20001220703125" text="total-flight" />
+            <TableColumn fx:id="cShipsDestroyed" prefWidth="141.60006713867188" text="ships-destroyed" />
         </columns>
       </TableView>
     </children>

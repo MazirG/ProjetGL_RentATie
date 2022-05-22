@@ -2,11 +2,11 @@ package login;
 
 import status.PilotStatus;
 
+/**
+ * Represents a pilot
+ */
 public class Pilot extends User{
-    private int pilotID;
     private String name;
-    private String username;
-    private String password;
     private int age;
     boolean inFlight;
     private PilotStatus status;
@@ -15,7 +15,6 @@ public class Pilot extends User{
 
     public Pilot(String username, String password, int pilotID, String name, int age, boolean inFlight, PilotStatus status, int totalFlight, int shipDestroyed) {
         super(pilotID,username, password);
-        this.pilotID = pilotID;
         this.name = name;
         this.age = age;
         this.inFlight = inFlight;
@@ -26,14 +25,12 @@ public class Pilot extends User{
 
     public Pilot(String username, String password, int pilotID, String name, int age) {
         super(pilotID, username, password);
-        this.pilotID = pilotID;
         this.name = name;
         this.age = age;
     }
 
     public Pilot(int pilotID, String name, int age,PilotStatus status, int totalFlight, int shipDestroyed, boolean inFlight) {
         super(pilotID,"","");
-        this.pilotID = pilotID;
         this.name = name;
         this.age = age;
         this.inFlight = inFlight;
@@ -43,43 +40,69 @@ public class Pilot extends User{
     }
 
 
-
+    /**
+     * @return current pilot name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * @return current pilot age
+     */
     public int getAge() {
         return this.age;
     }
 
+    /**
+     * @return current pilot status
+     */
     public PilotStatus getPilotStatus() {
         return this.status;
     }
 
+    /**
+     * @return current pilot total flight
+     */
     public int getTotalFlight() {
         return this.totalFlight;
     }
 
+    /**
+     * @return current pilot number oh enemy's ship destroyed
+     */
     public int getShipDestroyed() {
         return this.shipDestroyed;
     }
 
+    /**
+     * @return if the pilot is in flight
+     */
     public boolean isInFlight() {
         return this.inFlight;
     }
 
+    /**
+     * @return current pilot id
+     */
     public int getPilotID() {
-        return this.pilotID;
+        return super.getId();
     }
 
+    /**
+     * @return current pilot status
+     */
     public PilotStatus getStatus() {
         return this.status;
     }
 
+    /**
+     * @return the current pilot id, his name, his age, if he is in flight, his status, his total flight, the number of enemy's ship he destroyed
+     */
     @Override
     public String toString() {
         return "Pilot{" +
-                "pilotID=" + pilotID +
+                "pilotID=" + super.getId()+
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", inFlight=" + inFlight +

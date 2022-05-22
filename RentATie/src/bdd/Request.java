@@ -4,6 +4,7 @@
 package bdd;
 
 import bCrypt.*;
+import controllers.Controller;
 import fly.Flight;
 import fly.TieFighter;
 import javafx.collections.FXCollections;
@@ -17,19 +18,22 @@ import status.UserPost;
 
 import java.io.FileInputStream;
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.temporal.Temporal;
 import java.util.Properties;
 
-import static status.FighterStatus.Destroyed;
-import static status.PilotStatus.Dead;
 import static status.UserPost.Pilot;
 
-public class Request {
+/**
+ * Contains all the methods that make requests to the database
+ */
+public class Request{
 
-    //se conncter à la bdd
+    /**
+     * This method allows to connect to de data base
+     * @return
+     * @throws Exception if the connection has not been established
+     */
+
     public static Connection getConnection() throws Exception{
         Properties props = new Properties();
         try (FileInputStream fis = new FileInputStream("RentATie/ressources/conf.properties")) {
@@ -47,8 +51,10 @@ public class Request {
         return null;
     }
 
-    // afficher les tables, passer en paramètre l'attribut selon lequel on trie les lignes
-
+    /**
+     * this method display the pilot table
+     * @return an Observable List with all the pilots of the data base, this type makes easier displaying the pilots in the view
+     */
     public static ObservableList displayPilotTable(){
 
         ObservableList<Pilot> pilots = FXCollections.observableArrayList();
@@ -76,6 +82,10 @@ public class Request {
         }
     }
 
+    /**
+     * this method display the tie table
+     * @return an Observable List with all the ties of the data base, this type makes easier displaying the ties in the view
+     */
     public static ObservableList displayTieFighterTable(){
 
         ObservableList<TieFighter> fighters = FXCollections.observableArrayList();
@@ -106,6 +116,10 @@ public class Request {
         }
     }
 
+    /**
+     * this method display the flight table
+     * @return an Observable List with all the flights of the data base, this type makes easier displaying the flights in the view
+     */
     public static ObservableList displayFlightTable(){
 
         ObservableList<Flight> flights = FXCollections.observableArrayList();
@@ -138,8 +152,12 @@ public class Request {
         }
     }
 
-    //met à jour la flight duration
 
+    /**
+     * this method updates the flight duration if the flight is in progress
+     * @param flightID the flight we want to update the duration id
+     * @return if the duration has been updated
+     */
     public static boolean updateFlightDuration(int flightID){
 
         try{
@@ -193,17 +211,22 @@ public class Request {
         }
     }
 
-    //Créer un user
-    //Si officier alors le user n'est pas ajouté à la table Pilote
-    //si pilote alors le user est ajouté à la table Pilote
-
+    /**
+     * this methods is used for the registration of a user, the id is auto incremented. It checks if the new user username is not already taken,
+     * if it is there is no registration.
+     * @param post the new user post
+     * @param name the new user name
+     * @param username the new user username which must be unique
+     * @param age the new user age
+     * @param pwd the new user password which well be hashed in the bdd table
+     * @return if the registration has been completed
+     * @throws Exception if the user has not been registered
+     */
     public static boolean createUser(UserPost post, String name, String username, Integer age, String pwd) throws Exception{
         try{
             Connection con = getConnection();
 
             Statement stmt = con.createStatement();
-
-            // idem pour le username
 
             ResultSet rst = stmt.executeQuery("SELECT COUNT(*) FROM User WHERE username='"+username+"'");
 
@@ -213,19 +236,13 @@ public class Request {
                 return false;
             }
 
-            // si les informations précédentes ne sont pas prises, on insert le nouveau user
-
             PreparedStatement pstmt1 = con.prepareStatement("INSERT INTO User (`username`, `post`)VALUES ('" + username + "', '" + post + "')");
             pstmt1.executeUpdate();
-
-            // on récupère l'id créé par la bdd
 
             Statement stmt1 = con.createStatement();
             ResultSet rst1 = stmt1.executeQuery("SELECT id FROM User WHERE username='"+username+"'");
             rst1.next();
             int userID = rst1.getInt(1);
-
-            // on stock le mot de passe crypté dans la bdd
 
             User user = new User(userID,username, pwd);
             String salt = user.getSalt();
@@ -250,6 +267,12 @@ public class Request {
         }
     }
 
+    /**
+     * this methods register a tie. Its id is auto incremented, it is initially functional and not in flight.
+     * @param model the model of the tie we are registering
+     * @return if the registration has been completed
+     * @throws Exception if the tie has not been registered
+     */
     public static boolean createTieFighter(TieModel model ) throws Exception{
         try{
             Connection con = getConnection();
@@ -270,16 +293,24 @@ public class Request {
         }
     }
 
-    //Assigne un vol en prenant un pilote et un vaisseau
-
+    /**
+     * this method assign a pilot to a tie for a flight. the flight id is auto incremented. The end of the flight is not
+     * informed but there is the date of the end of the tie rent. The method checks if the pilot and the te are available
+     * and fit to fly. It also checks if the id corresponds to a pilot and not to an officer.
+     * @param pilotID id of the pilot assigned to the flight
+     * @param fighterID  id of the tie used for the flight
+     * @param mission the name of the flight mission
+     * @param sStartDate the start date of the flight
+     * @param sEndRent the end date of the tie rent
+     * @return if the assignment has been registered
+     * @throws Exception if the assignment has not been registered
+     */
     public static boolean assignFlight(int pilotID, int fighterID, String mission, String sStartDate, String sEndRent) throws Exception{
         try{
             LocalDate startDate = LocalDate.parse(sStartDate);
             LocalDate endRent = LocalDate.parse(sEndRent);
 
             Connection con = getConnection();
-
-            //on vérifie la disponibilité du vaisseau
 
             Statement stmt = con.createStatement();
             ResultSet rst = stmt.executeQuery("SELECT inFlight,Status FROM TieFighter WHERE fighterID="+fighterID);
@@ -289,8 +320,6 @@ public class Request {
             System.out.println("Tie fighter not available");
             return false;
             }
-
-            //on verifie la disponibilité du pilote
 
             Statement stmt3 = con.createStatement();
             ResultSet rst3 = stmt3.executeQuery("SELECT COUNT(id) FROM Pilote WHERE id="+pilotID);
@@ -309,9 +338,6 @@ public class Request {
                     return false;
                 }
             }
-
-
-            // si les informations précédentes sont ok, on insert le nouveau vol
 
             ResultSet rst2 = stmt.executeQuery("SELECT model FROM TieFighter WHERE fighterID="+fighterID);
             rst2.next();
@@ -337,6 +363,12 @@ public class Request {
 
     //quand on assigne un vol, le vaisseau est directement inFlight=1=true
 
+    /**
+     * this method is called in assignFlight. It updates automatically the pilot and tie availability indicating they are in flight.
+     * @param fighterID the id of the tie used for the flight
+     * @param pilotID the id of the user assigned to the flight
+     * @return if the updates has been done
+     */
     public static boolean InFlightUpdate(int fighterID, int pilotID){
         try{
             Connection con = getConnection();
@@ -356,35 +388,72 @@ public class Request {
             System.out.println("UpdateInFlight Completed.");
         }    }
 
-    public static boolean deleteUser(int id){
+    /**
+     * this methods delete a user from the user table. But if the user was a pilot, his profile is not deleted from the pilot table thus his records still accessible.
+     * Deleted from the user table, he can't access to the application.
+     * @param id of the user who will be deleted from the user table
+     * @return if the removal has been done
+     */
+    public static int deleteUser(int id){
         try{
             Connection con = getConnection();
 
-            //on vérifie que le pilote n'est pas en vol
+            //on vérifie que l'utilisateur est bien dans la bdd
 
             Statement stmt = con.createStatement();
-            ResultSet rst = stmt.executeQuery("SELECT inFlight FROM Pilote WHERE id="+id);
+            ResultSet rst = stmt.executeQuery("SELECT COUNT(*) FROM User WHERE id="+id);
             rst.next();
 
-            if (rst.getBoolean(1)==false){
-            PreparedStatement pstmt1 = con.prepareStatement("DELETE FROM User WHERE id="+id);
-            pstmt1.executeUpdate();
-            return true;
-            } else {
-                System.out.println("Le pilote est en vol");
-                return false;}
+            int isInUser = rst.getInt(1);
+
+            if (isInUser == 1){
+
+                String username = Request.username(id);
+                UserPost post = Request.post(username);
+
+                if (post.equals(Pilot)){
+
+                    //si c'est un pilote on vérifie qu'il n'est pas en vol
+
+                    rst = stmt.executeQuery("SELECT inFlight FROM Pilote WHERE id="+id);
+                    rst.next();
+
+                    if (rst.getBoolean(1)==false){
+                        PreparedStatement pstmt1 = con.prepareStatement("DELETE FROM User WHERE id="+id);
+                        pstmt1.executeUpdate();
+                        return 1;
+                    } else {
+                        System.out.println("Le pilote est en vol");
+                        return 0;
+                    }
+                }
+                else {
+                    PreparedStatement pstmt1 = con.prepareStatement("DELETE FROM User WHERE id="+id);
+                    pstmt1.executeUpdate();
+                    return 1;
+                }
+            }
+            else {
+                System.out.println("User pas dans la bdd");
+                return 0;
+            }
 
         } catch(Exception e){
             System.out.println(e);
-            return false;
+            return -1;
         }
         finally {
             System.out.println("Delete Completed.");
         }
     }
 
-    // modifie l'âge du pilote
 
+    /**
+     * this method modify the age of a pilot
+     * @param id the id of the pilot concerned
+     * @param Age the new age of the pilot
+     * @return if the update has been completed
+     */
     public static boolean modifyPilotAge(int id, int Age){
         try{
             Connection con = getConnection();
@@ -401,8 +470,12 @@ public class Request {
         }
     }
 
-    //modifier le mdp d'un user
-
+    /**
+     * this method modify the password of a user. The password is hashed.
+     * @param id the id of the user changing his password
+     * @param newPwd the user new password
+     * @return if the update has been completed
+     */
     public static boolean modifyUserPassword(int id, String newPwd){
         try{
             Connection con = getConnection();
@@ -432,8 +505,11 @@ public class Request {
         }
     }
 
-    // on retourne l'username associé à l'id
-
+    /**
+     * this method collects a pilot username from his id
+     * @param id id of the pilot we are looking for
+     * @return the username linked to the pilot id
+     */
     public static String username(int id){
         try{
             Connection con = getConnection();
@@ -452,7 +528,12 @@ public class Request {
         }
     }
 
-    //Changer le statut des vaisseaux et des pilotes librement
+    /**
+     * this method updates a tie status
+     * @param id id of the tie concerned
+     * @param Status the new tie status
+     * @return if the update has been completed
+     */
     public static boolean modifyFighterStatus(int id, FighterStatus Status){
         try{
             Connection con = getConnection();
@@ -469,6 +550,12 @@ public class Request {
         }
     }
 
+    /**
+     * this method updates the pilot status
+     * @param id id of the pilot concerned
+     * @param status the new pilot status
+     * @return if the update has been completed
+     */
     public static boolean modifyPilotStatus(int id, PilotStatus status){
         try{
             Connection con = getConnection();
@@ -486,7 +573,12 @@ public class Request {
     }
 
 
-    //méthode qu'on va appeler dans flightDone
+    /**
+     * this method is called in the method flightDone(). It updates the tie status once the flight done.
+     * @param id id of the tie used for the flight
+     * @param Status new tie status once the flight done
+     * @return if the update has been completed
+     */
     public static boolean DoneFighterStatus(int id, FighterStatus Status){
         try{
             Connection con = getConnection();
@@ -506,6 +598,12 @@ public class Request {
         }
     }
 
+    /**
+     * this method is called in the method flightDone(). It updates the pilot status once the flight done.
+     * @param id id of the pilot assigned for the flight
+     * @param status new pilot status once the flight done
+     * @return if the update has been completed
+     */
     public static boolean DonePilotStatus(int id, PilotStatus status){
         try{
             Connection con = getConnection();
@@ -528,8 +626,12 @@ public class Request {
         }
     }
 
-    //affiche tous les vols d'un pilote passé en paramètre
 
+    /**
+     * this method display the flight history of a pilot
+     * @param pilotID the id of the pilot we want to see his history
+     * @return an Observable List with all the flights the pilot had done, this type makes easier displaying the history in the view
+     */
     public static ObservableList displayHistory(int pilotID) {
 
         ObservableList<Flight> flights = FXCollections.observableArrayList();
@@ -564,6 +666,15 @@ public class Request {
 
     //Vol terminé, on met à jour le statut du vaisseau et celui de pilote
 
+
+    /**
+     * this method update the pilot and tie status once the flight done. It also updates the number of enemies ships the pilot destroyed
+     * @param id  id of the flight done
+     * @param Pstatus new status of the pilot assigned to the flight
+     * @param Fstatus new status of the tie used for the flight
+     * @param shipDestroyed number of enemies ships the pilots destroyed
+     * @return if the updates have been completed
+     */
     public static boolean flightDone(int id, PilotStatus Pstatus, FighterStatus Fstatus, int shipDestroyed){
 
         //create an object for date
@@ -615,21 +726,25 @@ public class Request {
         }
     }
 
-    // verification du mot de passe
+
+    /**
+     * this method allows the user to connect to the application thanks to his username and password. First the method checks if the username exists, then if the
+     * password is the good one
+     * @param username username of the user who wants to connect
+     * @param pwd the password entered by the user
+     * @return the id of the user if he succeed in connecting. Otherwise it returns -1
+     * @throws Exception if there is an error in the authentication
+     */
     public static int logIn(String username, String pwd) throws Exception{
         try{
             Connection con = getConnection();
 
             Statement stmt = con.createStatement();
 
-            // On vérifie que le username existe dans la bdd
-
             ResultSet rst = stmt.executeQuery("SELECT COUNT(*) FROM User WHERE username='"+username+"'");
             rst.next();
 
             if (rst.getInt(1)>0){
-
-                // On vérifie que le password entré correspond à celui enregistré pour cet username
 
                 rst = stmt.executeQuery("SELECT salt FROM User WHERE username='"+username+"'");
                 rst.next();
@@ -668,14 +783,19 @@ public class Request {
         }
     }
 
-    // On renvoie le post du username
+
+    /**
+     * this method checks if the username of the user is in the user table and returns his post
+     * @param username username of the user we are focusing on
+     * @return the post of the user
+     * @throws Exception if there is problem in the research
+     */
     public static UserPost post(String username) throws Exception{
         try{
             Connection con = getConnection();
 
             Statement stmt = con.createStatement();
 
-            // On vérifie que le username existe dans la bdd
             ResultSet rst = stmt.executeQuery("SELECT COUNT(*) FROM User WHERE username='"+username+"'");
             rst.next();
 
@@ -699,8 +819,10 @@ public class Request {
         }
     }
 
-
-    //liste des pilotes et vaisseaux disponibles
+    /**
+     * this methods displays all the pilots who are able to take a flight.
+     * @return an Observable List with all the pilots available to take a flight, this type makes easier displaying the pilots in the view
+     */
     public static ObservableList displayPilotAvailable(){
 
         ObservableList<Pilot> pilots = FXCollections.observableArrayList();
@@ -709,8 +831,6 @@ public class Request {
             Connection con = getConnection();
             Statement stmt = con.createStatement();
             ResultSet rst = stmt.executeQuery("SELECT * FROM Pilote WHERE inFlight=FALSE AND status='Safe'");
-
-            //on affiche les lignes
 
             while (rst.next()) {
                 String statut =rst.getString(4) ;
@@ -726,6 +846,10 @@ public class Request {
         }
     }
 
+    /**
+     * this methods displays all the ties which are able to fly.
+     * @return an Observable List with all the ties able to fly, this type makes easier displaying the tie in the view
+     */
     public static ObservableList displayTieFighterAvailable(){
 
         ObservableList<TieFighter> fighters = FXCollections.observableArrayList();

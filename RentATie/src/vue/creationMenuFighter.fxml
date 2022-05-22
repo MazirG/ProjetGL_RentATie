@@ -22,8 +22,8 @@
             <HBox prefHeight="39.0" prefWidth="373.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Fighter Model :              " />
-                  <RadioButton fx:id="rbHunter" mnemonicParsing="false" onAction="#rbHunter_action" prefHeight="26.0" prefWidth="97.0" styleClass="labels" stylesheets="@style/style.css" text="Hunter" />
-                  <RadioButton fx:id="rbXWing" mnemonicParsing="false" onAction="#rbXWing_action" prefHeight="26.0" prefWidth="106.0" styleClass="labels" stylesheets="@style/style.css" text="XWing" />
+                  <RadioButton fx:id="rbFighter" mnemonicParsing="false" onAction="#rbFighter_action" prefHeight="26.0" prefWidth="97.0" styleClass="labels" stylesheets="@style/style.css" text="Fighter" />
+                  <RadioButton fx:id="rbReaper" mnemonicParsing="false" onAction="#rbReaper_action" prefHeight="26.0" prefWidth="106.0" styleClass="labels" stylesheets="@style/style.css" text="Reaper" />
                </children>
             </HBox>
             <HBox prefHeight="38.0" prefWidth="377.0">
