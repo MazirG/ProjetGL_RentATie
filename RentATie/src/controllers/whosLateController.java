@@ -32,7 +32,7 @@ public class whosLateController extends Controller implements Initializable {
     private TableColumn<FlightLate, Integer> cLate;
 
     @FXML
-    private CheckBox cbPrint;
+    private Button btnPrint;
 
     @FXML
     private TableView<FlightLate> tableItems;
@@ -61,12 +61,11 @@ public class whosLateController extends Controller implements Initializable {
      * Changes the search options for the search bar so that it is adapted to the FlightLate information of the table
      */
     @FXML
-    void cbPrint_action() {
+    void btnPrint_action() {
         cId.setVisible(true);
         cLate.setVisible(true);
         cEndRent.setVisible(true);
         cBeginRent.setVisible(true);
-        cbPrint.setSelected(true);
 
         cId.setCellValueFactory(new PropertyValueFactory<FlightLate,Integer>("id"));
         cBeginRent.setCellValueFactory(new PropertyValueFactory<FlightLate,String>("begin"));

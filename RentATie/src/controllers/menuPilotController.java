@@ -33,7 +33,7 @@ public class menuPilotController extends Controller implements Initializable {
     private Button btnPassword;
 
     @FXML
-    private CheckBox cbFlights;
+    private Button btnFlights;
 
     @FXML
     private TableColumn<Flight, String> cDateBack;
@@ -76,7 +76,6 @@ public class menuPilotController extends Controller implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        cbFlights.setSelected(false);
         cId.setVisible(false);
         cMission.setVisible(false);
         cPilotId.setVisible(false);
@@ -109,14 +108,13 @@ public class menuPilotController extends Controller implements Initializable {
     }
 
     /**
-     * Action of the checkBox cbFlight:
+     * Action of the button btnFlights:
      * Prints the flight history of the Pilot inside the table
      * Set the search option for the searchBar so that it corresponds to the Flight information
      * Prints a message in the case where the Pilot history is empty
      */
     @FXML
-    void cbFlights_action(){
-        cbFlights.setSelected(true);
+    void btnFlights_action(){
         cId.setVisible(true);
         cMission.setVisible(true);
         cPilotId.setVisible(true);
