@@ -146,7 +146,7 @@ public class modifyMenuFighterController extends Controller implements Initializ
             if(succeed){
                 super.open_quit(btnValidate,"/vue/menuOfficer.fxml");
                 Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
-                errorAlert.setContentText("The Fighter has been modified !");
+                errorAlert.setContentText("The Tie has been modified !");
                 errorAlert.show();
             }
         }

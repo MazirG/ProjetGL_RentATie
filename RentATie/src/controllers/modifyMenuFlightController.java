@@ -203,7 +203,7 @@ public class modifyMenuFlightController extends Controller implements Initializa
         else if(fighterStatus.equals("Wrecked")==false && fighterStatus.equals("Functional")==false && fighterStatus.equals("Destroyed")==false && fighterStatus.equals("Damaged")==false){
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setHeaderText("Error");
-            errorAlert.setContentText("You need to chose a Fighter status to modify !");
+            errorAlert.setContentText("You need to chose a Tie status to modify !");
             errorAlert.showAndWait();
         }
 

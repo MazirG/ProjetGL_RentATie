@@ -16,8 +16,8 @@
           <TableColumn fx:id="cId" prefWidth="42.39999532699585" text="id" />
           <TableColumn fx:id="cMission" prefWidth="98.39999389648438" text="mission" />
             <TableColumn fx:id="cPilotId" prefWidth="68.79995727539062" text="pilot-id" />
-            <TableColumn fx:id="cFighterId" prefWidth="88.0" text="fighter-id" />
-            <TableColumn fx:id="cFighterModel" prefWidth="124.79998779296875" text="fighter-model" />
+            <TableColumn fx:id="cFighterId" prefWidth="88.0" text="tie-id" />
+            <TableColumn fx:id="cFighterModel" prefWidth="124.79998779296875" text="tie-model" />
             <TableColumn fx:id="cDateBegin" prefWidth="114.39996337890625" text="date-begin" />
             <TableColumn fx:id="cDateEnd" prefWidth="95.20001220703125" text="date-end" />
             <TableColumn fx:id="cDateBack" prefWidth="96.800048828125" text="date-back" />

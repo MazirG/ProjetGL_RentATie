@@ -10,26 +10,26 @@
          <children>
             <HBox prefHeight="30.0" prefWidth="100.0" styleClass="smallfont" stylesheets="@style/style.css">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Fighter ID :                     " />
-                  <Label styleClass="labels" stylesheets="@style/style.css" text="{Default}" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Tie ID :            " wrappingWidth="139.9296875" />
+                  <Label prefHeight="25.0" prefWidth="90.0" styleClass="labels" stylesheets="@style/style.css" text="{Default}" />
                </children>
             </HBox>
             <HBox prefHeight="39.0" prefWidth="373.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Fighter Model :              " />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Tie model : " wrappingWidth="138.8359375" />
                   <RadioButton fx:id="rbFighter" mnemonicParsing="false" onAction="#rbFighter_action" prefHeight="26.0" prefWidth="97.0" styleClass="labels" stylesheets="@style/style.css" text="Fighter" />
                   <RadioButton fx:id="rbReaper" mnemonicParsing="false" onAction="#rbReaper_action" prefHeight="26.0" prefWidth="106.0" styleClass="labels" stylesheets="@style/style.css" text="Reaper" />
                </children>
             </HBox>
             <HBox prefHeight="38.0" prefWidth="377.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Fighter status :              " />
-                  <Label prefHeight="18.0" prefWidth="160.0" styleClass="labels" stylesheets="@style/style.css" text="Functional {default}" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Tie status :       " wrappingWidth="141.8359375" />
+                  <Label prefHeight="25.0" prefWidth="186.0" styleClass="labels" stylesheets="@style/style.css" text="Functional {default}" />
                </children>
             </HBox>
             <HBox prefHeight="18.0" prefWidth="252.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Fighter in flight :   " wrappingWidth="164.4652099609375" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallfont" text="Tie in Flight :  : " wrappingWidth="142.4652099609375" />
                   <Label prefHeight="26.0" prefWidth="93.0" styleClass="labels" stylesheets="@style/style.css" text="No {Default}" />
                </children>
             </HBox>

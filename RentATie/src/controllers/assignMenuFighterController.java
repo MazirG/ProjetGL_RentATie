@@ -114,11 +114,13 @@ public class assignMenuFighterController extends Controller implements Initializ
         if(fighterSelected == null){
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setHeaderText("Error");
-            errorAlert.setContentText("You need to choose a Fighter to assign !");
+            errorAlert.setContentText("You need to choose a Tie to assign !");
             errorAlert.showAndWait();
         }
-        creationMenuFlightController controller = new creationMenuFlightController();
-        super.open_quit_share(btnValidate,"/vue/creationMenuFlight.fxml",controller, fighterSelected);
+        else {
+            creationMenuFlightController controller = new creationMenuFlightController();
+            super.open_quit_share(btnValidate,"/vue/creationMenuFlight.fxml",controller, fighterSelected);
+        }
     }
 
 

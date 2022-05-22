@@ -62,7 +62,7 @@ public class creationMenuFighterController extends Controller /*implements Initi
             if(succeed){
                 super.open_quit(btnValidate,"/vue/menuOfficer.fxml");
                 Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
-                errorAlert.setContentText("The Fighter has been added !");
+                errorAlert.setContentText("The Tie has been added !");
                 errorAlert.show();
 
             }
@@ -70,7 +70,7 @@ public class creationMenuFighterController extends Controller /*implements Initi
         else{
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setHeaderText("Error");
-            errorAlert.setContentText("You need to choose a model to create a Fighter !");
+            errorAlert.setContentText("You need to choose a model to create a Tie !");
             errorAlert.showAndWait();
         }
         //entrer dans bdd

@@ -323,8 +323,8 @@ public class menuOfficerController extends Controller implements Initializable {
         c1.setText("id");
         c2.setText("mission");
         c3.setText("pilot-id");
-        c4.setText("fighter-id");
-        c5.setText("fighter");
+        c4.setText("tie-id");
+        c5.setText("tie model");
         c6.setText("begin-date");
         c7.setText("end-date");
         c8.setText("back-date");
