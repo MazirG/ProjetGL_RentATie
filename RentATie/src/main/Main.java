@@ -1,4 +1,4 @@
-package test;
+package main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,24 +18,6 @@ public class Main extends Application {
 
     public static void main(String[] args) throws Exception {
         launch(args);
-
-        //Officer off1 = new Officer(1,"Pseudo1","Azerty123");
-        //Pilot pil1 = new Pilot("Pseudo2", "Azerty321", 21,"Nom2", 20);
-
-        //Request.logIn("Pseudo1", "Azerty321");
-
     }
 }
 
-/*public class Main {
-
-    public static void main(String[] args) throws Exception {
-
-
-        Officer off1 = new Officer(1,"Pseudo1","Azerty123");
-        Pilot pil1 = new Pilot("Pseudo2", "Azerty321", 21,"Nom2", 20);
-
-        Request.displayPilotAvailable();
-        Request.displayTieFighterAvailable();
-    }
-}*/
