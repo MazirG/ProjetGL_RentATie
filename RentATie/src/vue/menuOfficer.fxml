@@ -40,6 +40,6 @@
       <Button fx:id="btnDelete" layoutX="30.0" layoutY="437.0" mnemonicParsing="false" onAction="#btnDelete_action" prefHeight="34.0" prefWidth="138.0" text="Delete User" />
       <Button fx:id="btnModify" layoutX="199.0" layoutY="437.0" mnemonicParsing="false" onAction="#btnModify_action" prefHeight="34.0" prefWidth="95.0" text="Modify" />
       <Text layoutX="258.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="font" text="Session of officer " />
-      <Button fx:id="btnLate" layoutX="525.0" layoutY="145.0" mnemonicParsing="false" onAction="#btnLate_action" prefHeight="26.0" prefWidth="234.0" text="See flights that are late" />
+      <Button fx:id="btnLate" layoutX="525.0" layoutY="145.0" mnemonicParsing="false" onAction="#btnLate_action" prefHeight="26.0" prefWidth="234.0" styleClass="alertbutton" text="See flights that are late" />
    </children>
 </AnchorPane>

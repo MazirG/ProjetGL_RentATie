@@ -14,10 +14,9 @@ public class User {
 
     /**
      * This constructor generates a salt associated to the password entered and hashes the combination password + salt
-     * @param id
-     * @param username
-     * @param password
-     * @return if the registration has been completed
+     * @param id user id
+     * @param username user username
+     * @param password user password
      */
     public User(int id,String username, String password) {
         this.id=id;

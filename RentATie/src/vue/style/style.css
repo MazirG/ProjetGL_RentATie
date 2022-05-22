@@ -14,6 +14,12 @@
     -fx-font-family:"SquadaOne-Regular";
 
 }
+.main2 {
+    -fx-background-image:url('bg2.png');
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-font-family:"SquadaOne-Regular";
+}
 .button{
     -fx-background-color:#646FD4;
 }
@@ -34,6 +40,13 @@
     -fx-text-fill:#b3bcd1;
 }
 
+.alertlabel {
+    -fx-text-fill: #F32424;
+}
+
+.alertbutton {
+    -fx-background-color:#F32424;
+}
 
 
 

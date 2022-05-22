@@ -93,7 +93,7 @@ public class RequestTest {
         pstmt = con.prepareStatement("ALTER TABLE TieFighter AUTO_INCREMENT="+ (maxFiID+1) + " ");
         pstmt.executeUpdate();
 
-        rst = stmt.executeQuery("SELECT Max(id) FROM User");
+        rst = stmt.executeQuery("SELECT Max(id) FROM Pilote");
         rst.next();
 
         int maxUserID = rst.getInt(1);
@@ -535,7 +535,6 @@ public class RequestTest {
     /**
      * Test username (method that returns the username associated to an id).
      * @test.result The method username was executed correctly and returned the right username.
-     * @throws Exception If there was a problem in the execution of the methods used.
      */
     @Test
     void usernameTest() {

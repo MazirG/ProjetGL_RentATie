@@ -4,7 +4,6 @@
 package bdd;
 
 import bCrypt.*;
-import controllers.Controller;
 import fly.Flight;
 import fly.TieFighter;
 import javafx.collections.FXCollections;
@@ -30,8 +29,8 @@ public class Request{
 
     /**
      * This method allows to connect to de data base
-     * @return
      * @throws Exception if the connection has not been established
+     * @return Retruns the Connection to the database
      */
 
     public static Connection getConnection() throws Exception{
